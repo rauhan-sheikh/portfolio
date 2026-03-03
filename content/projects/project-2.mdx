@@ -1,0 +1,88 @@
+---
+title: "Feature Flag & Experimentation Service"
+description: "A feature flag and experimentation platform to ship changes safely and run A/B tests across multiple services."
+stack:
+  - Node.js
+  - Express
+  - MongoDB
+  - Redis
+  - TypeScript
+github: "https://github.com/rauhansheikh/feature-flags-service"
+demo: "https://feature-flags-demo.com"
+---
+
+export const metadata = {
+  title: "Feature Flag & Experimentation Service",
+  description:
+    "A feature flag and experimentation platform to ship changes safely and run A/B tests across multiple services.",
+  stack: ["Node.js", "Express", "MongoDB", "Redis", "TypeScript"],
+  github: "https://github.com/rauhansheikh/feature-flags-service",
+  demo: "https://feature-flags-demo.com",
+};
+
+# Feature Flag & Experimentation Service
+
+## Overview
+
+A backend service that allows product teams to progressively roll out features, run experiments, and quickly disable problematic functionality across multiple applications. It exposes a REST API and lightweight SDKs that client teams can consume.
+
+## Problem
+
+- New features were being deployed behind environment variables or hard-coded checks.
+- Rollbacks were slow and required full redeploys.
+- There was no consistent way to run A/B tests or guard high-risk changes.
+
+We needed a central service that could manage feature flags and experiments in a consistent, auditable way.
+
+## Architecture
+
+The service is built as a **Node.js / Express** application with **MongoDB** as the primary store and **Redis** as a read-through cache.
+
+- **API Layer**: REST endpoints for evaluating flags, managing experiments, and updating configurations.
+- **Storage**: MongoDB collections for flags, variants, environments, and audit logs.
+- **Caching**: Redis cache for hot flag configurations with short TTLs to keep reads fast.
+- **Clients**: Lightweight SDKs for Node.js services and a small browser client.
+
+This architecture keeps the **evaluation path extremely fast** while still allowing dynamic updates via an admin UI.
+
+## Key Technical Decisions
+
+1. **Stateless Evaluation API**
+   - Each evaluation call is stateless and depends only on request payload + cached configuration.
+   - Result: horizontally scalable service that can be replicated without sticky sessions.
+
+2. **Deterministic Bucketing**
+   - Implemented a deterministic hashing strategy for user bucketing so experiments are stable across sessions.
+   - Result: consistent experiment cohorts and reliable metrics.
+
+3. **Environment-aware Flags**
+   - Flags are scoped per environment (dev, staging, prod) with inheritance rules.
+   - Result: safe promotion of configurations without copying large JSON blobs.
+
+4. **Audit Trail**
+   - Every flag change is stored with who changed it, when, and what changed.
+   - Result: easier incident investigations and a clear history of risky changes.
+
+## Challenges
+
+1. **Latency Under Load**
+   - High QPS from multiple services caused occasional cache stampedes.
+   - Fixed by adding request coalescing and a short-lived in-process cache for very hot keys.
+
+2. **Schema Evolution**
+   - Early versions stored all configuration in a single document.
+   - Migrated to a more normalized structure while keeping the old API backwards compatible during rollout.
+
+3. **Rollout Safety**
+   - Introduced built-in “kill switches” that can short-circuit entire flag groups in case of critical regressions.
+
+## Improvements
+
+- Add first-class metrics integration so experiments can push exposure events to analytics automatically.
+- Build a richer UI for non-technical users to define target segments (e.g., cohorts, geographies).
+- Support multi-variation experiments with automatic winner selection.
+
+## Links
+
+- [GitHub](https://github.com/rauhansheikh/feature-flags-service)
+- [Live Demo](https://feature-flags-demo.com)
