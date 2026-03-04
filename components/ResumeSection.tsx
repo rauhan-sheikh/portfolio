@@ -12,7 +12,7 @@ export default function ResumeSection() {
         loading="lazy"
       />
       <a
-        href="/resume.pdf"
+        href="/Rauhan Sheikh - Resume v10.pdf"
         download
         className="px-6 py-2 rounded-xl border border-accent text-accent font-mono hover:bg-accent/10 transition"
       >
