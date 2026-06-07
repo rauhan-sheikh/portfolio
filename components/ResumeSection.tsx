@@ -6,13 +6,13 @@ export default function ResumeSection() {
         Prefer a traditional format? Here’s my resume.
       </p>
       <iframe
-        src="/Rauhan Sheikh - Resume v2.1.1.pdf"
+        src="/Rauhan Sheikh - Resume v2.2.1.pdf"
         title="Resume PDF"
         className="w-full rounded-xl border border-border mb-4 h-[500px] md:h-[700px]"
         loading="lazy"
       />
       <a
-        href="/Rauhan Sheikh - Resume v2.1.1.pdf"
+        href="/Rauhan Sheikh - Resume v2.2.1.pdf"
         download
         className="px-6 py-2 rounded-xl border border-accent text-accent font-mono hover:bg-accent/10 transition"
       >

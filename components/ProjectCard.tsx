@@ -21,15 +21,16 @@ export default function ProjectCard({ project }: { project: Project }) {
         ))}
       </div>
       <div className="flex flex-wrap gap-3">
-        {project.github && (
+        {project.github.map((repo) => (
           <Link
-            href={project.github}
+            key={repo.url}
+            href={repo.url}
             className="px-4 py-1.5 rounded-lg border border-accent text-accent font-mono bg-accent/10 hover:bg-accent/20 hover:text-accent hover:-translate-y-[1px] hover:shadow-md transition-all"
             target="_blank"
           >
-            GitHub
+            {repo.lable}
           </Link>
-        )}
+        ))}
         {project.demo && (
           <Link
             href={project.demo}

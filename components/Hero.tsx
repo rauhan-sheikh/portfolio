@@ -37,7 +37,7 @@ export default function Hero() {
                 View Projects
               </a>
               <a
-                href="/Rauhan Sheikh - Resume v10.pdf"
+                href="/Rauhan Sheikh - Resume v2.2.1.pdf"
                 download
                 className="px-5 py-2 rounded-xl border border-border text-secondary font-mono text-sm hover:bg-surface hover:text-primary transition shadow-sm"
               >
