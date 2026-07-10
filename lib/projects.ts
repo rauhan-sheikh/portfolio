@@ -47,7 +47,12 @@ export const projects: Project[] = [
       "Redis",
       "TypeScript",
     ],
-    github: [],
+    github: [
+      {
+        lable: "GitHub Repo",
+        url: "https://github.com/rauhan-sheikh/BusinessOS",
+      },
+    ],
     demo: "",
   },
 ];
