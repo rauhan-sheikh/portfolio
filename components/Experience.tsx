@@ -9,7 +9,7 @@ const experience: ExperienceItem[] = [
   {
     company: "Blackboard E-Learning Pvt Ltd (College Vidya)",
     role: "Software Developer",
-    duration: "May 2024 – Present",
+    duration: "May 2024 – April 2026",
     bullets: [
       "Contributing to large-scale EdTech platforms serving 15,000+ active students across LMS and ERP modules.",
       "Designing and implementing backend APIs, authentication flows, and role-based access control using Node.js and Express.",

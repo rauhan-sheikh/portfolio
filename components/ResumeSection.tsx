@@ -1,3 +1,5 @@
+import { resumePath } from "@/lib/resumePath";
+
 export default function ResumeSection() {
   return (
     <div className="relative rounded-xl border bg-surface border-border text-primary shadow-lg p-6 flex flex-col items-center max-w-3xl mx-auto overflow-hidden transition-colors">
@@ -6,13 +8,13 @@ export default function ResumeSection() {
         Prefer a traditional format? Here’s my resume.
       </p>
       <iframe
-        src="/Rauhan Sheikh - Resume v2.2.1.pdf"
+        src={resumePath}
         title="Resume PDF"
         className="w-full rounded-xl border border-border mb-4 h-[500px] md:h-[700px]"
         loading="lazy"
       />
       <a
-        href="/Rauhan Sheikh - Resume v2.2.1.pdf"
+        href={resumePath}
         download
         className="px-6 py-2 rounded-xl border border-accent text-accent font-mono hover:bg-accent/10 transition"
       >

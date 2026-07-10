@@ -1,3 +1,4 @@
+import { resumePath } from "@/lib/resumePath";
 import AnimatedHero from "./AnimatedHero";
 
 export default function Hero() {
@@ -37,7 +38,7 @@ export default function Hero() {
                 View Projects
               </a>
               <a
-                href="/Rauhan Sheikh - Resume v2.2.1.pdf"
+                href={resumePath}
                 download
                 className="px-5 py-2 rounded-xl border border-border text-secondary font-mono text-sm hover:bg-surface hover:text-primary transition shadow-sm"
               >

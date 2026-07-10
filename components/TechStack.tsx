@@ -1,7 +1,7 @@
 const stack = [
   {
     label: "Languages",
-    items: ["TypeScript", "JavaScript", "Python", "SQL", "Bash"],
+    items: ["TypeScript", "JavaScript", "Python", "Bash"],
   },
   {
     label: "Frontend",
@@ -10,30 +10,21 @@ const stack = [
       "Next.js",
       "Tailwind CSS",
       "Framer Motion",
-      "MDX",
       "HTML5",
       "CSS3",
     ],
   },
   {
     label: "Backend",
-    items: [
-      "Node.js",
-      "Express",
-      "tRPC",
-      "REST",
-      "GraphQL",
-      "JWT",
-      "WebSockets",
-    ],
+    items: ["Node.js", "Express", "REST", "JWT"],
   },
   {
     label: "Databases",
-    items: ["PostgreSQL", "MongoDB", "Prisma", "Redis"],
+    items: ["PostgreSQL", "MySQL", "MongoDB", "Prisma", "Redis"],
   },
   {
     label: "DevOps & Tools",
-    items: ["Git", "Docker", "CI/CD", "Vercel", "Linux", "Postman", "Figma"],
+    items: ["Git", "Docker", "CI/CD", "Vercel", "Linux", "Postman"],
   },
 ];
 
