@@ -1,0 +1,194 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  OWNER
+  EDITOR
+}
+
+enum ProjectCategory {
+  PERSONAL
+  PROFESSIONAL
+  CLIENT
+  INTERNAL
+  OPEN_SOURCE
+  EXPERIMENT
+}
+
+enum ProjectStatus {
+  DRAFT
+  PUBLISHED
+  PRIVATE
+  ARCHIVED
+}
+
+enum NowCategory {
+  BUILDING
+  LEARNING
+  READING
+  EXPERIMENTING
+  THINKING
+}
+
+enum PersonalityCategory {
+  LIKES_BUILDING
+  OBSESSIONS
+  ANNOYANCES
+  OPINIONS
+  IMPROVING
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      Role     @default(OWNER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id               String          @id @default(cuid())
+  title            String
+  slug             String          @unique
+  category         ProjectCategory @default(PERSONAL)
+  year             String?
+  shortDesc        String
+  longDesc         String?         @db.Text
+  status           ProjectStatus   @default(PUBLISHED)
+  isFeatured       Boolean         @default(false)
+  order            Int             @default(0)
+  
+  // Visual identity
+  coverImage       String?
+  thumbnail        String?
+  accentColor      String?         @default("#3b82f6")
+  projectMark      String?
+  
+  // Links
+  liveUrl          String?
+  githubUrl        String?
+  demoUrl          String?
+  caseStudySlug    String?
+  
+  // Narrative blocks for deep case studies
+  theProblem       String?         @db.Text
+  theMessyPart     String?         @db.Text
+  architecture     String?         @db.Text
+  technicalDecisions String?       @db.Text
+  whatIdChange     String?         @db.Text
+  fullContent      String?         @db.Text
+  
+  // JSON arrays stored as text
+  stack            String          @default("[]") // JSON string array of technologies
+  metrics          String          @default("[]") // JSON string array of { label: string, value: string, description?: string }
+  links            String          @default("[]") // JSON string array of { label: string, url: string }
+  
+  // Visibility toggles
+  showOnHome       Boolean         @default(true)
+  showInWork       Boolean         @default(true)
+  
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+model Experience {
+  id             String    @id @default(cuid())
+  company        String
+  role           String
+  location       String?
+  startDate      String
+  endDate        String?
+  isCurrent      Boolean   @default(false)
+  description    String?   @db.Text
+  bullets        String    @default("[]") // JSON string array of bullet points
+  technologies   String    @default("[]") // JSON string array of tech tags
+  metrics        String    @default("[]") // JSON string array of outcomes
+  linkedProjects String    @default("[]") // JSON string array of project slugs or titles
+  order          Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Article {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  excerpt     String    @db.Text
+  content     String    @db.Text
+  coverImage  String?
+  author      String    @default("Rauhan Sheikh")
+  publishedAt DateTime  @default(now())
+  readingTime String    @default("4 min read")
+  tags        String    @default("[]") // JSON string array of tags
+  isFeatured  Boolean   @default(false)
+  isPublished Boolean   @default(true)
+  seoTitle    String?
+  seoDesc     String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model NowItem {
+  id        String      @id @default(cuid())
+  category  NowCategory @default(BUILDING)
+  title     String
+  text      String
+  order     Int         @default(0)
+  isActive  Boolean     @default(true)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model PersonalityItem {
+  id        String              @id @default(cuid())
+  category  PersonalityCategory @default(OPINIONS)
+  title     String
+  body      String              @db.Text
+  order     Int                 @default(0)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+}
+
+model ContactMessage {
+  id         String   @id @default(cuid())
+  name       String
+  email      String
+  subject    String?
+  message    String   @db.Text
+  isRead     Boolean  @default(false)
+  isArchived Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+model NavigationItem {
+  id         String   @id @default(cuid())
+  label      String
+  href       String
+  order      Int      @default(0)
+  isEnabled  Boolean  @default(true)
+  isExternal Boolean  @default(false)
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  action     String
+  entityType String
+  entityId   String?
+  details    String?  @db.Text
+  createdAt  DateTime @default(now())
+}
