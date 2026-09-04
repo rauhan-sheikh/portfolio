@@ -11,7 +11,8 @@
     "seed": "tsx prisma/seed.ts",
     "db:migrate": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
-    "db:setup": "prisma migrate deploy && tsx prisma/seed.ts"
+    "db:setup": "prisma migrate deploy && tsx prisma/seed.ts",
+    "admin:password": "tsx scripts/change-password.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
