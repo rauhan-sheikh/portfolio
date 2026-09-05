@@ -261,6 +261,47 @@ Serving 20,000+ daily active learners requires zero tolerance for sluggish endpo
       showOnHome: true,
       showInWork: true,
     },
+    {
+      title: "Akshta Enterprises",
+      slug: "akshta-enterprises",
+      category: ProjectCategory.CLIENT,
+      year: "2026",
+      shortDesc: "Commercial business platform engineered end-to-end for Akshta Enterprises with custom responsive layouts, automated inquiry routing, and direct WhatsApp integrations.",
+      longDesc: "Designed and developed a live production-ready web application for Akshta Enterprises. Handled full lifecycle delivery from client discovery and architecture through deployment, integrating EmailJS contact pipelines, WhatsApp customer communication, responsive typography, and high SEO performance.",
+      status: ProjectStatus.PUBLISHED,
+      isFeatured: true,
+      order: 4,
+      coverImage: "/projects/akshta.png",
+      accentColor: "#10b981",
+      projectMark: "AKSH",
+      liveUrl: "https://akshtaenterprises.com/",
+      githubUrl: "",
+      theProblem: "The client needed a modern, accessible digital presence to showcase manufacturing and enterprise operations. Traditional generic templates had heavy bloat, poor mobile conversion paths, and lacked instantaneous lead capture channels for commercial inquiries.",
+      theMessyPart: "Iterating directly on client requirements and content revisions while maintaining strict performance budgets, sub-second initial load times, and ensuring zero message drops on mobile network drops.",
+      architecture: "Next.js application with Tailwind CSS for high-performance styling. Client-side form validation orchestrating dual dispatch: asynchronous transactional delivery via EmailJS for logging alongside instant WhatsApp deep-link generation for real-time customer messaging.",
+      technicalDecisions: "1. Jamstack architecture with static optimization ensuring rapid TTFB and 98+ Lighthouse scores.\n2. Direct WhatsApp API integration alongside validated EmailJS form pipelines.\n3. Accessibility (WCAG compliant) and responsive UX across all screen sizes.\n4. Comprehensive on-page SEO with semantic HTML5 and OpenGraph metadata.",
+      whatIdChange: "Integrate headless CMS earlier to allow direct client catalog updates without requiring code adjustments.",
+      fullContent: `## End-to-End Client Delivery
+
+Building client software requires a different muscle than internal tools: you are directly responsible for translating commercial objectives into responsive, maintainable production software.
+
+### Core Deliverables
+- **Custom Responsive Architecture**: Engineered from scratch using Next.js and Tailwind CSS, tailored specifically to commercial showcase needs.
+- **Dual Inquiry Pipeline**: Integrated direct WhatsApp messaging triggers and EmailJS transactional notifications for immediate customer response.
+- **Performance & SEO Excellence**: Structured semantic HTML, OpenGraph tags, and clean layout geometry delivering 98+ Lighthouse metrics.
+- **Full Ownership**: Managed requirements gathering, iterative revisions, production deployment, and domain DNS setup.`,
+      stack: JSON.stringify(["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "EmailJS"]),
+      metrics: JSON.stringify([
+        { label: "Performance", value: "98+ Lighthouse", description: "Near-instant mobile & desktop load times" },
+        { label: "Inquiry Flow", value: "Email & WhatsApp", description: "Automated real-time lead capture pipelines" },
+        { label: "Delivery", value: "End-to-End", description: "Requirements, architecture, UI, and live deployment" },
+      ]),
+      links: JSON.stringify([
+        { label: "Live Website", url: "https://akshtaenterprises.com/" },
+      ]),
+      showOnHome: true,
+      showInWork: true,
+    },
   ];
 
   for (const p of projectsData) {
@@ -292,7 +333,7 @@ Serving 20,000+ daily active learners requires zero tolerance for sluggish endpo
         { label: "Focus", value: "Enterprise Architecture" },
         { label: "Stack", value: "Node.js · PostgreSQL · Next.js" },
       ]),
-      linkedProjects: JSON.stringify(["business-os"]),
+      linkedProjects: JSON.stringify([]),
       order: 1,
     },
     {
@@ -336,7 +377,7 @@ Serving 20,000+ daily active learners requires zero tolerance for sluggish endpo
         { label: "Delivery", value: "End-to-End" },
         { label: "Performance", value: "95+ Lighthouse" },
       ]),
-      linkedProjects: JSON.stringify(["second-brain"]),
+      linkedProjects: JSON.stringify(["akshta-enterprises"]),
       order: 3,
     },
   ];
@@ -651,7 +692,7 @@ That curiosity is what led from basic scripts to writing full-stack systems, man
     { key: "site_tagline", value: "I like building the parts of software that have to actually work." },
     { key: "email", value: "hello@rauhansheikh.com" },
     { key: "location", value: "India" },
-    { key: "availability_badge", value: "Open to interesting backend & full-stack engineering opportunities" },
+    { key: "availability_badge", value: "Open to opportunities" },
     { key: "availability_active", value: "true" },
     { key: "github_url", value: "https://github.com/rauhan-sheikh" },
     { key: "linkedin_url", value: "https://linkedin.com/in/rauhan-sheikh" },

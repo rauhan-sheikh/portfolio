@@ -107,7 +107,7 @@ export default async function ContactPage() {
             Send an Inquiry
           </h2>
           <p className="text-xs text-secondary leading-relaxed font-mono">
-            Messages are delivered directly to my admin inbox and notification queue.
+            Messages are delivered directly to my inbox and notification queue.
           </p>
           <ContactForm />
         </div>

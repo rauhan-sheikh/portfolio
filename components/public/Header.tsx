@@ -25,7 +25,7 @@ const defaultNav: NavItem[] = [
 
 export default function Header({
   navItems = defaultNav,
-  availabilityBadge = "Open to interesting backend & full-stack roles",
+  availabilityBadge = "Open to opportunities",
   availabilityActive = true,
 }: {
   navItems?: NavItem[];
@@ -57,9 +57,12 @@ export default function Header({
           <Logo size="sm" showText={true} />
 
           {availabilityActive && (
-            <div className="hidden lg:flex items-center gap-2 px-2.5 py-0.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="truncate max-w-[240px]">
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono shadow-2xs whitespace-nowrap">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="font-medium">
                 {availabilityBadge}
               </span>
             </div>
@@ -138,9 +141,12 @@ export default function Header({
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-border bg-background px-6 py-5 space-y-4 shadow-xl animate-in slide-in-from-top duration-200">
           {availabilityActive && (
-            <div className="flex items-center gap-2 p-2.5 rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>{availabilityBadge}</span>
+            <div className="flex items-center gap-2.5 p-2.5 rounded-lg border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="font-medium">{availabilityBadge}</span>
             </div>
           )}
 

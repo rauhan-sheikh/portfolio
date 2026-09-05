@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   description:
     "Personal Brand Platform for Rauhan Sheikh. I build things, break things, figure things out, and ship them. Focused on backend reliability, database architecture, and resilient web software.",
   metadataBase: new URL("https://rauhansheikh.com"),
+  alternates: {
+    canonical: "https://rauhansheikh.com",
+  },
   openGraph: {
     title: "Rauhan Sheikh — Software Developer",
     description:
@@ -25,6 +28,9 @@ export const metadata: Metadata = {
     description: "Building the parts of software that have to actually work.",
     creator: "@rauhansheikh",
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+  },
 };
 
 export default async function RootLayout({
@@ -34,7 +40,7 @@ export default async function RootLayout({
 }>) {
   // Fetch active navigation items and site settings from database
   let navItems: { label: string; href: string }[] = [];
-  let availabilityBadge = "Open to interesting backend & full-stack opportunities";
+  let availabilityBadge = "Open to opportunities";
   let availabilityActive = true;
 
   try {
@@ -71,9 +77,41 @@ export default async function RootLayout({
     ];
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://rauhansheikh.com/#person",
+        name: "Rauhan Sheikh",
+        url: "https://rauhansheikh.com",
+        jobTitle: "Software Developer",
+        description: "Software developer focused on backend reliability, database architecture, and resilient web software.",
+        sameAs: [
+          "https://github.com/rauhan-sheikh",
+          "https://linkedin.com/in/rauhan-sheikh",
+          "https://x.com/rauhansheikh",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://rauhansheikh.com/#website",
+        url: "https://rauhansheikh.com",
+        name: "Rauhan Sheikh",
+        publisher: {
+          "@id": "https://rauhansheikh.com/#person",
+        },
+      },
+    ],
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased font-body bg-background text-primary min-h-screen flex flex-col justify-between">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

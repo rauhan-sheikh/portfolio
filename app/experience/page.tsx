@@ -11,8 +11,18 @@ export const metadata = {
 export const revalidate = 0;
 
 export default async function ExperiencePage() {
-  const experiences = await db.experience.findMany({
-    orderBy: { order: "asc" },
+  const [experiences, allProjects] = await Promise.all([
+    db.experience.findMany({
+      orderBy: { order: "asc" },
+    }),
+    db.project.findMany({
+      select: { slug: true, title: true },
+    }),
+  ]);
+
+  const projectTitleMap: Record<string, string> = {};
+  allProjects.forEach((p) => {
+    projectTitleMap[p.slug] = p.title;
   });
 
   return (
@@ -124,17 +134,25 @@ export default async function ExperiencePage() {
                       Shipped Architecture & Projects
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {linkedProjects.map((pSlug) => (
-                        <Link
-                          key={pSlug}
-                          href={`/work/${pSlug}`}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/30 bg-accent/5 hover:bg-accent/10 text-accent font-semibold transition-colors"
-                        >
-                          <Layers className="h-3.5 w-3.5" />
-                          <span>View {pSlug} Case Study</span>
-                          <ArrowRight className="h-3 w-3" />
-                        </Link>
-                      ))}
+                      {linkedProjects.map((pSlug) => {
+                        const projectTitle =
+                          projectTitleMap[pSlug] ||
+                          pSlug
+                            .split("-")
+                            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                            .join(" ");
+                        return (
+                          <Link
+                            key={pSlug}
+                            href={`/work/${pSlug}`}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-accent/30 bg-accent/5 hover:bg-accent/10 text-accent font-semibold transition-colors"
+                          >
+                            <Layers className="h-3.5 w-3.5" />
+                            <span>View {projectTitle} Case Study</span>
+                            <ArrowRight className="h-3 w-3" />
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

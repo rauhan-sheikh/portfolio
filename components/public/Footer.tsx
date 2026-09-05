@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail, ArrowUpRight, Shield } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
 import { Github, Linkedin, Twitter } from "./Icons";
 import Logo from "./Logo";
 
@@ -109,16 +109,6 @@ export default function Footer() {
                 <Twitter className="h-4 w-4" />
                 <span>x.com/rauhansheikh</span>
               </a>
-            </div>
-
-            <div className="pt-4">
-              <Link
-                href="/admin"
-                className="inline-flex items-center gap-1.5 text-xs font-mono text-secondary/60 hover:text-secondary border border-border/40 hover:border-border px-2.5 py-1 rounded bg-surface/30 transition-all"
-              >
-                <Shield className="h-3 w-3" />
-                <span>Admin Console</span>
-              </Link>
             </div>
           </div>
         </div>
