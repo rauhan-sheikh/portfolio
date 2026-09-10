@@ -1,12 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
-
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.ADMIN_SESSION_SECRET || "default-rauhan-portfolio-secret-change-in-production-32chars"
-);
-
-const COOKIE_NAME = "admin_session";
+import { JWT_SECRET, COOKIE_NAME } from "@/lib/secret";
 
 async function hasValidAdminSession(req: NextRequest): Promise<boolean> {
   const token = req.cookies.get(COOKIE_NAME)?.value;

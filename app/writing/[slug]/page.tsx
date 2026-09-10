@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, ArrowRight, User } from "lucide-react";
 import Logo from "@/components/public/Logo";
+import Markdown from "@/components/public/Markdown";
 
 export const revalidate = 0;
 
@@ -111,9 +112,7 @@ export default async function ArticleDetailPage({
       </header>
 
       {/* Article Markdown Content */}
-      <div className="prose whitespace-pre-wrap">
-        {article.content}
-      </div>
+      <Markdown>{article.content}</Markdown>
 
       {/* Author Bio Box */}
       <div className="p-6 rounded-2xl border border-border bg-surface/50 space-y-3 font-mono text-xs">

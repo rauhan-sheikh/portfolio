@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Save, Plus, Trash2, CheckCircle2, AlertCircle } from "lucide-react";
 import Link from "next/link";
+import NewsletterPanel from "./NewsletterPanel";
 
 interface ArticleFormProps {
   initialData?: any;
@@ -239,6 +240,9 @@ export default function ArticleForm({ initialData, isNew = false }: ArticleFormP
           </label>
         </div>
       </div>
+
+      {/* Newsletter — only for saved articles; sending is deliberately separate from Save */}
+      {!isNew && initialData?.id && <NewsletterPanel articleId={initialData.id} />}
 
       {/* Excerpt & Tags */}
       <div className="p-6 rounded-xl border border-slate-800 bg-slate-950 space-y-4 font-mono text-xs">

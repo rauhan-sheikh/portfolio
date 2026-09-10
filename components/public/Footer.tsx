@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Mail, ArrowUpRight } from "lucide-react";
 import { Github, Linkedin, Twitter } from "./Icons";
 import Logo from "./Logo";
+import NewsletterSignup from "./NewsletterSignup";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -109,6 +110,24 @@ export default function Footer() {
                 <Twitter className="h-4 w-4" />
                 <span>x.com/rauhansheikh</span>
               </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Newsletter */}
+        <div className="mt-12 pt-8 border-t border-border">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+            <div className="md:col-span-5 space-y-2">
+              <h3 className="text-sm font-bold font-heading text-primary">
+                New essays, straight to your inbox
+              </h3>
+              <p className="text-xs text-secondary leading-relaxed">
+                Occasional writing on backend reliability, ledgers, and distributed
+                systems. Sent only when there&apos;s something worth reading.
+              </p>
+            </div>
+            <div className="md:col-span-7">
+              <NewsletterSignup source="footer" />
             </div>
           </div>
         </div>

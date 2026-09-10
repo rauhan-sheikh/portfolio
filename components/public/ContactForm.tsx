@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function ContactForm() {
@@ -12,6 +12,13 @@ export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
+  // Second bot signal: scripted submits are instant, humans take seconds.
+  // Stamped in an effect rather than during render, which must stay pure.
+  const startedAt = useRef(0);
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
@@ -21,7 +28,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, subject, message, honeypot }),
+        body: JSON.stringify({ name, email, subject, message, honeypot, startedAt: startedAt.current }),
       });
 
       const data = await res.json();
@@ -51,7 +58,7 @@ export default function ContactForm() {
           Message Received!
         </h3>
         <p className="text-secondary font-body text-sm max-w-md mx-auto leading-relaxed">
-          Thank you for reaching out. Your inquiry has been stored securely in my message queue. I typically reply within 24–48 hours.
+          Thank you for reaching out. Your message is saved and on its way to my inbox — check yours for a confirmation. I typically reply within 24–48 hours.
         </p>
         <button
           onClick={() => setStatus("idle")}

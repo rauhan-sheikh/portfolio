@@ -15,6 +15,7 @@ import {
 import { Github } from "@/components/public/Icons";
 import TeamsArchitectureStory from "@/components/public/TeamsArchitectureStory";
 import BulkEmailArchitectureStory from "@/components/public/BulkEmailArchitectureStory";
+import Markdown from "@/components/public/Markdown";
 
 export const revalidate = 0;
 
@@ -236,8 +237,8 @@ export default async function ProjectCaseStudyPage({
 
       {/* Narrative Block 4: Full Content (Markdown body) */}
       {project.fullContent && (
-        <section className="prose">
-          <div className="whitespace-pre-wrap">{project.fullContent}</div>
+        <section>
+          <Markdown>{project.fullContent}</Markdown>
         </section>
       )}
 

@@ -7,7 +7,17 @@ async function main() {
   console.log("🌱 Starting database seeding...");
 
   // 1. Admin User
-  const defaultPassword = process.env.ADMIN_DEFAULT_PASSWORD || "adminpassword123";
+  // No hardcoded fallback: a seeded-but-unconfigured production deploy would
+  // otherwise ship with credentials published in this repo.
+  const defaultPassword = process.env.ADMIN_DEFAULT_PASSWORD;
+  if (!defaultPassword) {
+    throw new Error(
+      "ADMIN_DEFAULT_PASSWORD is required to seed the admin user. Set it in .env before running the seed."
+    );
+  }
+  if (defaultPassword.length < 8) {
+    throw new Error("ADMIN_DEFAULT_PASSWORD must be at least 8 characters.");
+  }
   const hashedPassword = await bcrypt.hash(defaultPassword, 10);
 
   const admin = await prisma.adminUser.upsert({

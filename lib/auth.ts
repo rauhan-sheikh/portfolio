@@ -2,12 +2,7 @@ import bcrypt from "bcryptjs";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { db } from "./db";
-
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.ADMIN_SESSION_SECRET || "default-rauhan-portfolio-secret-change-in-production-32chars"
-);
-
-const COOKIE_NAME = "admin_session";
+import { JWT_SECRET, COOKIE_NAME } from "./secret";
 
 export async function hashPassword(password: string): Promise<string> {
   const salt = await bcrypt.genSalt(10);

@@ -1,6 +1,22 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { verifyPassword, signSessionToken, COOKIE_NAME } from "@/lib/auth";
+import { checkLoginRateLimit } from "@/lib/rate-limit";
+
+/**
+ * Records a failed attempt. Both the unknown-email and bad-password branches
+ * write this, so the rate limiter cannot be sidestepped by guessing addresses,
+ * and the audit log finally shows attacks rather than only successes.
+ */
+async function recordFailure(email: string, reason: string) {
+  await db.auditLog.create({
+    data: {
+      action: "ADMIN_LOGIN_FAILED",
+      entityType: "AUTH",
+      details: `Failed login attempt for ${email} (${reason})`,
+    },
+  });
+}
 
 export async function POST(req: Request) {
   try {
@@ -13,11 +29,22 @@ export async function POST(req: Request) {
       );
     }
 
+    const normalizedEmail = email.toLowerCase().trim();
+
+    const limit = await checkLoginRateLimit(normalizedEmail);
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: "Too many failed attempts. Please try again later." },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } }
+      );
+    }
+
     const user = await db.adminUser.findUnique({
-      where: { email: email.toLowerCase().trim() },
+      where: { email: normalizedEmail },
     });
 
     if (!user) {
+      await recordFailure(normalizedEmail, "unknown email");
       return NextResponse.json(
         { error: "Invalid credentials" },
         { status: 401 }
@@ -26,6 +53,7 @@ export async function POST(req: Request) {
 
     const isValid = await verifyPassword(password, user.password);
     if (!isValid) {
+      await recordFailure(normalizedEmail, "bad password");
       return NextResponse.json(
         { error: "Invalid credentials" },
         { status: 401 }

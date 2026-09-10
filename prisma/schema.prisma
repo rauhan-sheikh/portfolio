@@ -132,6 +132,12 @@ model Article {
   isPublished Boolean   @default(true)
   seoTitle    String?
   seoDesc     String?
+
+  // Set exactly once, by the newsletter send endpoint's atomic compare-and-set.
+  // NEVER add this to the PUT handler's field list in app/api/admin/articles/[id]/route.ts
+  // — a routine form save would reset the guard and allow a duplicate blast.
+  newsletterSentAt DateTime?
+
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
@@ -191,4 +197,50 @@ model AuditLog {
   entityId   String?
   details    String?  @db.Text
   createdAt  DateTime @default(now())
+
+  // Supports the login rate limiter, which counts recent ADMIN_LOGIN_FAILED rows.
+  @@index([action, createdAt])
+}
+
+enum SubscriberStatus {
+  PENDING
+  CONFIRMED
+  UNSUBSCRIBED
+}
+
+model Subscriber {
+  id               String           @id @default(cuid())
+  email            String           @unique
+  status           SubscriberStatus @default(PENDING)
+
+  // Stored random values, not HMACs: an unsubscribe link must keep working
+  // forever, and a signed token would break everywhere if the secret rotated.
+  confirmToken     String           @unique
+  unsubscribeToken String           @unique
+
+  source           String           @default("footer")
+  confirmedAt      DateTime?
+  unsubscribedAt   DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([status])
+}
+
+/// One row per (article, subscriber) actually sent. Doubles as the checkpoint
+/// that makes a timed-out send resumable without duplicating delivery.
+model NewsletterSend {
+  id           String   @id @default(cuid())
+  articleId    String
+  subscriberId String
+  email        String
+  status       String   @default("SENT") // SENT | FAILED
+  providerId   String?
+  error        String?  @db.Text
+  createdAt    DateTime @default(now())
+
+  // Load-bearing: makes createMany({ skipDuplicates: true }) idempotent and
+  // gives recipient-level at-most-once delivery.
+  @@unique([articleId, subscriberId])
+  @@index([articleId])
 }
