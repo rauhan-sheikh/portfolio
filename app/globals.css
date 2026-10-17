@@ -35,6 +35,50 @@ html {
   }
 }
 
+/* Pixel-art avatar logo: periodic blink + hover tilt */
+.logo-avatar-img {
+  image-rendering: pixelated;
+}
+
+.logo-avatar {
+  transition: transform 0.2s steps(4, end);
+}
+
+.logo-avatar:hover {
+  transform: rotate(-6deg) translateY(-1px);
+}
+
+.logo-avatar-blink {
+  opacity: 0;
+  animation: logo-blink 5s steps(1, end) infinite;
+}
+
+@keyframes logo-blink {
+  0%,
+  92%,
+  100% {
+    opacity: 0;
+  }
+  94%,
+  97% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-avatar {
+    transition: none;
+  }
+
+  .logo-avatar:hover {
+    transform: none;
+  }
+
+  .logo-avatar-blink {
+    animation: none;
+  }
+}
+
 body {
   @apply bg-background text-primary transition-colors duration-300 antialiased selection:bg-accent/20 selection:text-accent;
 }
