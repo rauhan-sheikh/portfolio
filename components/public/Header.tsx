@@ -54,7 +54,7 @@ export default function Header({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         {/* Brand Logo / Monogram */}
         <div className="flex items-center gap-3">
-          <Logo size="sm" showText={true} />
+          <Logo size="md" showText={true} />
 
           {availabilityActive && (
             <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono shadow-2xs whitespace-nowrap">
