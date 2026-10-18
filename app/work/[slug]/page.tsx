@@ -30,7 +30,7 @@ export async function generateMetadata({
     where: { slug },
   });
 
-  if (!project || project.status === "PRIVATE") {
+  if (!project || project.status !== "PUBLISHED") {
     return { title: "Project Not Found", robots: { index: false, follow: false } };
   }
 
@@ -59,7 +59,7 @@ export default async function ProjectCaseStudyPage({
     where: { slug },
   });
 
-  if (!project || project.status === "PRIVATE") {
+  if (!project || project.status !== "PUBLISHED") {
     notFound();
   }
 

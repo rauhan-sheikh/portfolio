@@ -1,0 +1,16 @@
+[
+  {
+    "institution": "IGNOU",
+    "degree": "Master of Computer Applications (MCA)",
+    "period": "Pursuing (Online)",
+    "detail": null,
+    "order": 1
+  },
+  {
+    "institution": "Jamia Hamdard",
+    "degree": "Bachelor of Computer Applications (BCA)",
+    "period": null,
+    "detail": "8.62 CGPA",
+    "order": 2
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "title": "MarketBaaz",
+  "slug": "marketbaaz",
+  "category": "PROFESSIONAL",
+  "year": "2026",
+  "shortDesc": "Helps Amazon sellers decide what to sell: a Chrome extension and web app (formerly BrandForge) that turn marketplace data into clear insight, and never show a number the evidence can't support.",
+  "longDesc": "MarketBaaz helps Amazon sellers research and validate products. A Chrome extension overlays sales, revenue and opportunity insight on Amazon pages, and a web app adds product, brand and seller research, keyword tools, an AI brand-building suite and billing. I am the sole engineer: I took it from a waitlist to a public launch and built the extension, data pipeline, backend, payments and infrastructure.",
+  "status": "PUBLISHED",
+  "isFeatured": true,
+  "order": 1,
+  "coverImage": null,
+  "thumbnail": null,
+  "accentColor": "#f97316",
+  "projectMark": "MBZ",
+  "liveUrl": "https://marketbaaz.com",
+  "githubUrl": "",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "Sellers choose products on guesswork or pay for tools whose numbers they can't interrogate. A research tool that invents confident-looking figures is worse than none: someone acts on them and loses real money. The challenge was to be useful and honest at the same time.",
+  "theMessyPart": "Real-world data is hostile. Marketplaces differ in layout and currency, pages change under you, listings vary by size and colour, and the source site pushes back on aggressive reading. Getting one trustworthy dataset out of that, at a speed that doesn't get anyone blocked, is most of the work.",
+  "architecture": "A Chrome extension reads the pages a user already visits and talks to a backend API; nothing proprietary ships to the client. The backend (Next.js, TypeScript, Node.js) stores everything in MongoDB as a single source of truth, runs background jobs on Redis and BullMQ, and serves estimates that are computed ahead of time by a trained model rather than on every request. Payments, authentication, email and an admin console complete the platform, and the whole stack is self-hosted on our own VPS.",
+  "technicalDecisions": "1. Honesty over completeness: when the evidence is insufficient, the product says so explicitly instead of returning a plausible-looking number.\n2. Keep intelligence on the server, so competitors who inspect the extension find only API calls.\n3. Precompute expensive estimates in the database so normal reads stay fast.\n4. Prefer wrong-free to wrong-fast: if a value can't be established reliably, store nothing rather than something misleading.\n5. Ship behind switches: new capabilities start admin-only and widen by plan, audience and usage limit without a redeploy.\n6. Make every release reversible, with builds off the production host and instant rollback.",
+  "whatIdChange": "I would separate workloads onto their own hosts from day one. Running application, workers and databases together made every incident bigger than it needed to be, and the migration that fixed it was avoidable.",
+  "fullContent": "## What it is\n\nMarketBaaz is an Amazon seller-intelligence platform, formerly BrandForge. It has two halves that share one backend:\n\n- **A Chrome extension** that adds research directly onto Amazon pages while a seller browses.\n- **A web app** with product, brand and seller research, keyword tools, an AI brand-building suite, a marketplace, billing and a full admin console.\n\nIt works across 24 Amazon country sites with correct local currencies, and I built and run it as its only engineer. The web app was a waitlist when I joined; I took it public, built the extension end to end, and then shipped a new extension version roughly every two days for five weeks.\n\n## An estimator that knows what it doesn't know\n\nThe most important design decision was a refusal:\n\n> If the evidence isn't there, the system says so.\n\nInstead of a fixed formula, estimates come from a trained machine-learning pipeline that is retrained on a schedule, versioned, and checked against its previous output. When a product doesn't have a reliable signal, users see an explicit state such as \"Not enough data\", never a fabricated figure. A ranking layer on top is configurable and carries a confidence value, so a result backed by plenty of evidence is distinguishable from a thin one.\n\n## Fast at scale\n\nThe extension gathers the data itself as people browse, and MarketBaaz has grown into a data engine covering products, keywords, brands and sellers. Keeping it quick as that data grew meant fixing real bottlenecks: a database sort that ran out of memory and crashed product listing was moved into the database itself, targeted indexes and caching were added, writes became bulk and repeat-safe, and page weight was cut (the main logo went from 243 KB to about 6 KB).\n\n## Built to be operated\n\n- **Rollouts:** features ship dark and are enabled per plan or audience from the admin console.\n- **Billing:** subscription changes, renewals, retries, tax invoices and discount codes.\n- **Support:** in-product problem reporting that creates tickets in the admin support centre.\n- **Migration:** I moved the live system to new infrastructure and a new domain, with staged user emails, a rollback-ready release and the old domain kept working during the transition.",
+  "showOnHome": true,
+  "showInWork": true,
+  "stack": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Node.js",
+    "MongoDB",
+    "Redis",
+    "BullMQ",
+    "Python",
+    "Chrome Extensions",
+    "Razorpay",
+    "Firebase Auth"
+  ],
+  "metrics": [
+    {
+      "label": "Data Engine",
+      "value": "4 data types",
+      "description": "Products, keywords, brands and sellers, gathered by the extension itself"
+    },
+    {
+      "label": "Reach",
+      "value": "24 country sites",
+      "description": "Amazon marketplaces worldwide, each with its own currency"
+    },
+    {
+      "label": "Shipping Pace",
+      "value": "Every ~2 days",
+      "description": "A new extension version roughly every two days for five weeks"
+    },
+    {
+      "label": "Ownership",
+      "value": "Sole engineer",
+      "description": "Extension, web app, backend and infrastructure"
+    }
+  ],
+  "links": [
+    {
+      "label": "MarketBaaz",
+      "url": "https://marketbaaz.com"
+    }
+  ],
+  "showOnResume": true,
+  "resumeBlurb": "Public Amazon seller-intelligence platform (web app and Chrome extension) that turns marketplace data into clear insight and never shows a number the evidence can't support."
+}

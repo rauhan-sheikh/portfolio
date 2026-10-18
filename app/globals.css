@@ -175,3 +175,13 @@ a {
 .prose a {
   @apply text-accent underline decoration-accent/40 hover:decoration-accent transition-colors;
 }
+
+/* Touch devices: make footer and header links comfortable to tap (about 40px tall). */
+@media (pointer: coarse) {
+  footer a,
+  header nav a {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+}

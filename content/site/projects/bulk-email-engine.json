@@ -1,0 +1,53 @@
+{
+  "title": "Bulk Email Engine (Redis / BullMQ)",
+  "slug": "bulk-email-engine",
+  "category": "PROFESSIONAL",
+  "year": "2024–2025",
+  "shortDesc": "Asynchronous high-volume email delivery architecture replacing fragile browser-dependent API loops with resilient Redis/BullMQ worker queues.",
+  "longDesc": "Transformed an operational bottleneck where sending 1,500 campaign emails required an employee to keep their browser tab open, with frequent partial failures and zero retry semantics, into an autonomous, resilient background queue system.",
+  "status": "PUBLISHED",
+  "isFeatured": true,
+  "order": 5,
+  "coverImage": "/projects/bullmq-email.png",
+  "thumbnail": null,
+  "accentColor": "#f59e0b",
+  "projectMark": "BULLMQ",
+  "liveUrl": "",
+  "githubUrl": "",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "The original implementation made HTTP requests sequentially from the browser client in a loop: Browser -> API -> Email Service. If the employee closed their laptop, had a network hiccup, or hit rate limits on email #480, the campaign died midway. Resending resulted in duplicate emails to the first 480 recipients.",
+  "theMessyPart": "Database state management during partial queue runs. When a worker dies or an email bounces, the recipient status in the database needed atomic locking to avoid race conditions between parallel worker threads.",
+  "architecture": "Browser pushes batch payload to API -> API validates and enqueues jobs to Redis via BullMQ -> Decoupled background workers consume jobs with rate limiting and exponential retry strategies -> Worker publishes completion events via WebSockets to admin dashboard.",
+  "technicalDecisions": "1. Transitioned campaign initiation to an immediate 202 Accepted response that pushes jobs to BullMQ.\n2. Configured exponential backoff with jitter on SMTP rate limit errors.\n3. Chunked dispatch to respect email provider concurrency boundaries (50 parallel jobs max).\n4. Atomic job deduplication using Redis keys based on campaignId:recipientId.",
+  "whatIdChange": "Add dead-letter queue (DLQ) automated replay UI directly into the admin dashboard from day one.",
+  "fullContent": "## The Problem Wasn't Sending Emails. The Problem Was Where the Work Lived.\n\nIf an operation requires processing 1,500 records and someone tells the user:\n> \"Please do not close this browser tab until the progress bar reaches 100%\"\n\n...that is not an operation. That is an architectural flaw.\n\n### Before: The Client-Tied Loop\n```text\nBrowser (Loop) ──HTTP──> API ──SMTP──> Provider\n      │\n(User closes laptop at 32%)\n      │\n      ▼\nCampaign halts. 480 sent, 1020 lost. Re-run causes duplicates.\n```\n\n### After: Decoupled Queue Architecture\n```text\nBrowser ──HTTP (Single Batch)──> API ──Push Job──> Redis (BullMQ)\n                                                         │\n                                               ┌─────────┴─────────┐\n                                               ▼                   ▼\n                                           Worker 1            Worker 2\n                                               │                   │\n                                               ▼                   ▼\n                                            Provider            Provider\n```\n\nWith workers processing asynchronously in Docker containers, the user can immediately close their laptop, take a train, or shut down their workstation. The work continues reliably, failures retry with exponential backoff, and idempotency guarantees that no student receives duplicate correspondence.",
+  "showOnHome": true,
+  "showInWork": true,
+  "stack": [
+    "Node.js",
+    "BullMQ",
+    "Redis",
+    "TypeScript",
+    "Express",
+    "Docker"
+  ],
+  "metrics": [
+    {
+      "label": "Failure Rate",
+      "value": "< 0.05%",
+      "description": "From ~30% browser drops down to near zero"
+    },
+    {
+      "label": "Batch Scale",
+      "value": "1,500+ / campaign",
+      "description": "Autonomous asynchronous background batches"
+    },
+    {
+      "label": "Operator Time",
+      "value": "100% Freed",
+      "description": "Fire-and-forget submission with real-time job status"
+    }
+  ],
+  "links": []
+}

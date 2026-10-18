@@ -1,0 +1,40 @@
+{
+  "title": "Reel Script Generator",
+  "slug": "reel-script-generator",
+  "category": "INTERNAL",
+  "year": "2026",
+  "shortDesc": "A small internal MVP, built over a few days, that generates short-form reel scripts and syncs them to a shared Google Sheet for the social media team to review.",
+  "longDesc": "A quick proof of concept built early at ProSync: generate a script, save it, and review it in a shared sheet. Small by design.",
+  "status": "PUBLISHED",
+  "isFeatured": false,
+  "order": 8,
+  "coverImage": null,
+  "thumbnail": null,
+  "accentColor": "#ec4899",
+  "projectMark": "REEL",
+  "liveUrl": "",
+  "githubUrl": "",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "The social media team had no shared place to review reel scripts.",
+  "theMessyPart": "Keeping it small: the useful part is the review loop, so scripts had to land where the team already works.",
+  "architecture": "A small web app that generates scripts and automatically syncs each one to a Google Sheet.",
+  "technicalDecisions": "1. Sync every script to a Google Sheet so reviewers need no new tool.\n2. Ship a working MVP in days and demo it before adding anything else.",
+  "whatIdChange": "I would capture reviewer feedback in the sheet from the start so approved and rejected scripts can improve the prompts.",
+  "fullContent": "## A few-day MVP\n\nA deliberately small project: a reel script generator whose output syncs automatically to a Google Sheet. I demoed it to the social media team within the week. It is still low on the priority list and is not a large system.",
+  "showOnHome": false,
+  "showInWork": true,
+  "stack": [
+    "Web app",
+    "Google Sheets API",
+    "LLM prompting"
+  ],
+  "metrics": [
+    {
+      "label": "Time to MVP",
+      "value": "A few days",
+      "description": "Built and demoed to the team in the same week"
+    }
+  ],
+  "links": []
+}

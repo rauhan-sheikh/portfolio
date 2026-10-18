@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description:
     "Rauhan Sheikh is a software developer building reliable backends, resilient database architecture, and web software that has to actually work.",
   metadataBase: new URL(SITE_URL),
+  alternates: { types: { "application/rss+xml": `${SITE_URL}/feed.xml` } },
   robots: {
     index: true,
     follow: true,

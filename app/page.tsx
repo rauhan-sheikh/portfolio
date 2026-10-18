@@ -20,9 +20,12 @@ import { pageMetadata } from "@/lib/seo";
 import TeamsArchitectureStory from "@/components/public/TeamsArchitectureStory";
 import BulkEmailArchitectureStory from "@/components/public/BulkEmailArchitectureStory";
 
-export const metadata = {
-  alternates: { canonical: "/" },
-};
+export const metadata = pageMetadata({
+  title: { absolute: "Rauhan Sheikh — Software Developer" },
+  description:
+    "Rauhan Sheikh is a software developer building reliable backends, resilient database architecture, and web software that has to actually work.",
+  path: "/",
+});
 
 export const revalidate = 0; // Dynamic server component
 
@@ -69,6 +72,18 @@ export default async function HomePage() {
 
   const isEnabled = (key: string) => settings[key] !== "false";
 
+  // Snapshot card: edited as the `snapshot_items` setting (JSON) in content/site/settings.json.
+  const defaultSnapshot = [
+    { label: "Public product, solo", text: "Took MarketBaaz, a tool that helps Amazon sellers decide what to sell, from waitlist to public launch as its only engineer." },
+    { label: "Senior dev, small team", text: "Built an internal HR platform with a desktop app, and a CRM, as the senior developer on a two-person team." },
+    { label: "Reliability first", text: "Estimates that admit when they don't know, releases that can be reversed, and servers I run myself." },
+  ];
+  let snapshotItems: { label: string; text: string }[] = defaultSnapshot;
+  try {
+    const parsed = JSON.parse(settings.snapshot_items || "null");
+    if (Array.isArray(parsed) && parsed.length) snapshotItems = parsed.slice(0, 4);
+  } catch {}
+
   return (
     <div className="space-y-24 sm:space-y-32 pt-28 pb-16 max-w-6xl mx-auto px-4 sm:px-6 font-body">
       {/* 1. HERO SECTION */}
@@ -110,7 +125,7 @@ export default async function HomePage() {
                   Read Technical Essays
                 </Link>
                 <a
-                  href={settings.resume_pdf_url || "/resume.pdf"}
+                  href="/resume.pdf"
                   target="_blank"
                   className="px-5 py-2.5 rounded-xl border border-border/70 hover:bg-surface text-secondary hover:text-primary transition"
                 >
@@ -130,28 +145,18 @@ export default async function HomePage() {
               </div>
 
               <ul className="space-y-3 text-secondary text-[12px] leading-relaxed">
-                <li className="flex items-start gap-2.5">
-                  <span className="text-accent font-bold">01</span>
-                  <span>
-                    <strong className="text-primary font-semibold">Production Ownership:</strong> Scaled systems serving 20K+ active students across LMS & ERP portals.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-accent font-bold">02</span>
-                  <span>
-                    <strong className="text-primary font-semibold">Architecture Discipline:</strong> Replaced fragile browser loops with BullMQ/Redis worker pipelines.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-accent font-bold">03</span>
-                  <span>
-                    <strong className="text-primary font-semibold">Data Integrity:</strong> Engineered double-entry financial accounting using integer minor units & BigInt.
-                  </span>
-                </li>
+                {snapshotItems.map((item, i) => (
+                  <li key={item.label} className="flex items-start gap-2.5">
+                    <span className="text-accent font-bold">{String(i + 1).padStart(2, "0")}</span>
+                    <span>
+                      <strong className="text-primary font-semibold">{item.label}:</strong> {item.text}
+                    </span>
+                  </li>
+                ))}
               </ul>
 
               <div className="pt-2 border-t border-border/60 flex items-center justify-between text-[11px] text-secondary">
-                <span>TypeScript · PostgreSQL · Prisma</span>
+                <span>{settings.snapshot_stack || "TypeScript · Next.js · MongoDB"}</span>
                 <span className="text-emerald-500">Online</span>
               </div>
             </div>
@@ -211,7 +216,7 @@ export default async function HomePage() {
                 Featured Systems & Architecture
               </h2>
               <p className="text-sm text-secondary mt-1 max-w-xl">
-                Not generic demo clones. Commercial-grade systems, double-entry financial engines, and production integrations.
+                Real products in production: a public Amazon seller platform, internal HR and CRM systems, and the infrastructure behind them.
               </p>
             </div>
 
@@ -219,7 +224,7 @@ export default async function HomePage() {
               href="/work"
               className="text-xs font-mono font-semibold text-accent hover:underline flex items-center gap-1 self-start sm:self-auto"
             >
-              <span>Browse All Systems ({featuredProjects.length}+)</span>
+              <span>Browse all work</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>

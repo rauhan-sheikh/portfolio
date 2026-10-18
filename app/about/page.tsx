@@ -107,6 +107,7 @@ export default async function AboutPage() {
         </div>
         <ul className="space-y-2 text-xs leading-relaxed">
           <li>• Based in India, working across time zones with global teams.</li>
+          <li>• Currently running MarketBaaz, an internal HR platform and a CRM at ProSync, including the servers underneath them.</li>
           <li>• Favorite database primitives: PostgreSQL composite partial indexes & strict check constraints.</li>
           <li>• Architecture stance: A modular monolith with strict boundaries beats premature microservices 95% of the time.</li>
         </ul>

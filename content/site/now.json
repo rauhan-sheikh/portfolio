@@ -1,0 +1,146 @@
+[
+  {
+    "category": "BUILDING",
+    "title": "MarketBaaz, Workforce & CRM at ProSync",
+    "text": "Building MarketBaaz, an internal HR platform and a CRM at ProSync, and running the servers underneath them.",
+    "url": null,
+    "order": 1,
+    "isActive": true
+  },
+  {
+    "category": "LEARNING",
+    "title": "Running production on my own servers",
+    "text": "Linux, process supervision, backups and safe deploys: the unglamorous skills that decide whether a product stays up when something goes wrong.",
+    "url": null,
+    "order": 2,
+    "isActive": true
+  },
+  {
+    "category": "THINKING",
+    "title": "When should software say \"I don't know\"?",
+    "text": "Estimates and scores that admit uncertainty are more trustworthy than ones that always answer. I'm writing up the rules I use to decide.",
+    "url": null,
+    "order": 3,
+    "isActive": true
+  },
+  {
+    "category": "EXPERIMENTING",
+    "title": "Local-First Architecture",
+    "text": "Offline-capable apps that store data locally and sync safely when the connection returns, the same problem a desktop work tool has to solve.",
+    "url": null,
+    "order": 4,
+    "isActive": true
+  },
+  {
+    "category": "READING",
+    "title": "Brandur Leach",
+    "text": "Deeply practical writing on Postgres, APIs and idempotency, from someone who has run them at scale.",
+    "url": "https://brandur.org",
+    "order": 10,
+    "isActive": true
+  },
+  {
+    "category": "READING",
+    "title": "Marc Brooker's blog",
+    "text": "Distributed systems and reliability explained clearly, without the hand-waving.",
+    "url": "https://brooker.co.za/blog/",
+    "order": 11,
+    "isActive": true
+  },
+  {
+    "category": "READING",
+    "title": "Julia Evans",
+    "text": "How things actually work (networking, databases, debugging), explained with great drawings.",
+    "url": "https://jvns.ca",
+    "order": 12,
+    "isActive": true
+  },
+  {
+    "category": "READING",
+    "title": "Use The Index, Luke",
+    "text": "A free guide to SQL indexing for developers. The reason I reach for EXPLAIN before adding hardware.",
+    "url": "https://use-the-index-luke.com",
+    "order": 13,
+    "isActive": true
+  },
+  {
+    "category": "READING",
+    "title": "Amazon Builders' Library",
+    "text": "How a very large company thinks about retries, timeouts, deployment safety and load shedding.",
+    "url": "https://builder.aws.com/learn/topics/builders-library",
+    "order": 14,
+    "isActive": true
+  },
+  {
+    "category": "LISTENING",
+    "title": "Postgres FM",
+    "text": "Two experts, weekly, going deep on one Postgres topic at a time: indexes, locks, scaling.",
+    "url": "https://postgres.fm",
+    "order": 20,
+    "isActive": true
+  },
+  {
+    "category": "LISTENING",
+    "title": "Oxide and Friends",
+    "text": "Candid conversations about building real systems, hardware and software, and what went wrong.",
+    "url": "https://oxide-and-friends.transistor.fm/",
+    "order": 21,
+    "isActive": true
+  },
+  {
+    "category": "LISTENING",
+    "title": "The Changelog",
+    "text": "Interviews with the people behind the tools and open-source projects developers use every day.",
+    "url": "https://changelog.com/podcast",
+    "order": 22,
+    "isActive": true
+  },
+  {
+    "category": "WATCHING",
+    "title": "Hussein Nasser",
+    "text": "Backend engineering on YouTube: databases, proxies, protocols and how they behave under load.",
+    "url": "https://www.youtube.com/@hnasr",
+    "order": 30,
+    "isActive": true
+  },
+  {
+    "category": "WATCHING",
+    "title": "CMU Database Group",
+    "text": "University-level database lectures, free: storage engines, indexing and query optimisation.",
+    "url": "https://www.youtube.com/@CMUDatabaseGroup",
+    "order": 31,
+    "isActive": true
+  },
+  {
+    "category": "WATCHING",
+    "title": "Martin Kleppmann's distributed systems lectures",
+    "text": "A clear, rigorous course on replication, consistency and why distributed systems are hard.",
+    "url": "https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB",
+    "order": 32,
+    "isActive": true
+  },
+  {
+    "category": "LEARNING",
+    "title": "PostgreSQL Internals",
+    "text": "Diving deeper into Postgres storage engines: VACUUM behavior, write-ahead logging (WAL), and composite index selectivity.",
+    "url": null,
+    "order": 90,
+    "isActive": false
+  },
+  {
+    "category": "READING",
+    "title": "Engineering Literature",
+    "text": "Reading 'Designing Data-Intensive Applications' by Martin Kleppmann & 'A Philosophy of Software Design' by John Ousterhout.",
+    "url": null,
+    "order": 91,
+    "isActive": false
+  },
+  {
+    "category": "THINKING",
+    "title": "Accidental Complexity in Web Apps",
+    "text": "Reflecting on how much complexity in modern web apps comes from trying to coordinate distributed state in JavaScript instead of relying on solid database primitives.",
+    "url": null,
+    "order": 92,
+    "isActive": false
+  }
+]

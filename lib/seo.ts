@@ -35,12 +35,13 @@ export function pageMetadata({
   return {
     title,
     description: desc,
-    alternates: { canonical: path },
+    alternates: { canonical: path, types: { "application/rss+xml": `${SITE_URL}/feed.xml` } },
     openGraph: {
       title: shareTitle,
       description: desc,
       type,
-      url: path,
+      // Next drops a bare "/" here, so the homepage needs the absolute URL for og:url to render.
+      url: path === "/" ? SITE_URL : path,
       siteName: SITE_NAME,
       locale: "en_US",
       ...extra,

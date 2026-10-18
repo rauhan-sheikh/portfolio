@@ -278,16 +278,6 @@ export default function AdminSettingsPage() {
                     className="w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-900 text-slate-100 focus:outline-hidden"
                   />
                 </div>
-
-                <div>
-                  <label className="block text-slate-300 mb-1 font-semibold">Resume PDF Path / URL</label>
-                  <input
-                    type="text"
-                    value={settings.resume_pdf_url || ""}
-                    onChange={(e) => handleChange("resume_pdf_url", e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-900 text-slate-100 focus:outline-hidden"
-                  />
-                </div>
               </div>
             </div>
           </div>

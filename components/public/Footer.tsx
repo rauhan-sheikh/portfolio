@@ -53,6 +53,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <a href="/feed.xml" className="hover:text-primary transition-colors inline-flex items-center gap-1">
+                  RSS Feed <ArrowUpRight className="h-3 w-3 opacity-60" />
+                </a>
+              </li>
+              <li>
                 <Link href="/now" className="hover:text-primary transition-colors inline-flex items-center gap-1">
                   Now / Living Status <ArrowUpRight className="h-3 w-3 opacity-60" />
                 </Link>

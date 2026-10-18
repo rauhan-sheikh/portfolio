@@ -24,37 +24,27 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const { id } = await params;
     const data = await req.json();
 
+    // Only fields present in the request are written, so a partial save can never
+    // silently reset something it didn't send (this once hid projects from /work).
+    const stringFields = [
+      "title", "slug", "category", "year", "shortDesc", "longDesc", "status", "coverImage",
+      "thumbnail", "accentColor", "projectMark", "liveUrl", "githubUrl", "demoUrl", "theProblem",
+      "theMessyPart", "architecture", "technicalDecisions", "whatIdChange", "fullContent",
+    ] as const;
+    const jsonFields = ["stack", "metrics", "links"] as const;
+    const boolFields = ["isFeatured", "showOnHome", "showInWork"] as const;
+
+    const update: Record<string, unknown> = {};
+    for (const key of stringFields) if (data[key] !== undefined) update[key] = data[key];
+    for (const key of jsonFields) {
+      if (data[key] !== undefined) update[key] = typeof data[key] === "string" ? data[key] : JSON.stringify(data[key] || []);
+    }
+    for (const key of boolFields) if (data[key] !== undefined) update[key] = Boolean(data[key]);
+    if (data.order !== undefined) update.order = Number(data.order) || 0;
+
     const updated = await db.project.update({
       where: { id },
-      data: {
-        title: data.title,
-        slug: data.slug,
-        category: data.category,
-        year: data.year,
-        shortDesc: data.shortDesc,
-        longDesc: data.longDesc,
-        status: data.status,
-        isFeatured: Boolean(data.isFeatured),
-        order: Number(data.order) || 0,
-        coverImage: data.coverImage,
-        thumbnail: data.thumbnail,
-        accentColor: data.accentColor,
-        projectMark: data.projectMark,
-        liveUrl: data.liveUrl,
-        githubUrl: data.githubUrl,
-        demoUrl: data.demoUrl,
-        theProblem: data.theProblem,
-        theMessyPart: data.theMessyPart,
-        architecture: data.architecture,
-        technicalDecisions: data.technicalDecisions,
-        whatIdChange: data.whatIdChange,
-        fullContent: data.fullContent,
-        stack: typeof data.stack === "string" ? data.stack : JSON.stringify(data.stack || []),
-        metrics: typeof data.metrics === "string" ? data.metrics : JSON.stringify(data.metrics || []),
-        links: typeof data.links === "string" ? data.links : JSON.stringify(data.links || []),
-        showOnHome: Boolean(data.showOnHome),
-        showInWork: Boolean(data.showInWork),
-      },
+      data: update,
     });
 
     await db.auditLog.create({

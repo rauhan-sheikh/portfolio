@@ -1,0 +1,65 @@
+{
+  "title": "BusinessOS",
+  "slug": "business-os",
+  "category": "PERSONAL",
+  "year": "2024–2026",
+  "shortDesc": "Commercial-grade financial operating system for SMEs with ledger-first accounting, immutable transaction journals, integer minor-unit money calculations, and multi-tenant audit logs.",
+  "longDesc": "BusinessOS was built from the ground up to solve the core integrity problems found in traditional SME software: rounding errors from floating-point arithmetic, un-audited state mutations, and fragile balance recalculations. Built on Next.js, PostgreSQL, Prisma, and Redis.",
+  "status": "PUBLISHED",
+  "isFeatured": true,
+  "order": 7,
+  "coverImage": "/projects/business-os.png",
+  "thumbnail": null,
+  "accentColor": "#3b82f6",
+  "projectMark": "BOS",
+  "liveUrl": "https://businessos.rauhansheikh.com",
+  "githubUrl": "https://github.com/rauhan-sheikh/BusinessOS",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "Standard invoicing and accounting tools for SMEs frequently use floating-point math for calculations or mutate transaction rows directly in the database. When a refund or correction occurs, past audit trails are overwritten. Reconciling discrepancies at month-end becomes an impossible forensic nightmare.",
+  "theMessyPart": "Handling multi-currency transactions and fractional cent tax distributions without floating-point drift. Every monetary value is stored as an integer representing the smallest currency unit (cents/paise) with BigInt in Prisma. Rounding remainders must be deterministically allocated to balancing line items rather than swallowed.",
+  "architecture": "Dual-entry ledger pattern where every transaction consists of at least two balancing entries. Balances are derived from snapshot aggregates and immutable event streams. Redis is used for idempotent request locking to prevent double-submitting invoices or chargebacks.",
+  "technicalDecisions": "1. Storing amounts as BigInt integers in smallest currency unit (cents/paise) to guarantee arithmetic correctness.\n2. Strict append-only journal: balance changes are never updated, only reversed or augmented by balancing entries.\n3. Row-level tenant isolation baked into query middleware.\n4. Distributed Redis locks for idempotency on payment and invoice webhooks.",
+  "whatIdChange": "I would incorporate event sourcing with an append-only log earlier in the design instead of relying partly on relational table triggers for audit trails.",
+  "fullContent": "## Why Another Business Tool?\n\nMost accounting software for small businesses treats accounting like an editable spreadsheet. If an invoice amount was recorded incorrectly, an admin clicks \"Edit\" and updates the number.\n\nIn real financial systems, this is catastrophic. It breaks audit trails, obscures forensic timelines, and creates unaccountable balances.\n\n**BusinessOS was architected with one non-negotiable rule:**\n> Money does not update. Money only moves.\n\n### Core Architectural Pillars\n\n1. **Integer Minor-Unit Math**: Every balance and line item is stored in minor currency units (e.g. ₹100.50 is stored as `10050` BigInt). No JavaScript float rounding quirks.\n2. **Double-Entry Journal**: Debits must always equal Credits. Every transaction is a balanced compound entry.\n3. **Idempotent Webhooks**: Payment gateways emit retries. BusinessOS locks incoming transaction tokens in Redis with an atomic TTL to prevent duplicate ledger postings.\n4. **Tenant Isolation**: Clean multi-tenancy enforced at the database layer with cryptographic workspace segregation.",
+  "showOnHome": true,
+  "showInWork": true,
+  "stack": [
+    "Next.js",
+    "TypeScript",
+    "PostgreSQL",
+    "Prisma",
+    "Redis",
+    "Tailwind CSS",
+    "Node.js"
+  ],
+  "metrics": [
+    {
+      "label": "Ledger",
+      "value": "Integer Minor-Units",
+      "description": "Zero floating-point rounding errors via BigInt"
+    },
+    {
+      "label": "Integrity",
+      "value": "100% Immutable",
+      "description": "Corrections require explicit reversal journal entries"
+    },
+    {
+      "label": "Tenancy",
+      "value": "Multi-Tenant",
+      "description": "Row-level tenant isolation across all ledger queries"
+    }
+  ],
+  "links": [
+    {
+      "label": "GitHub Repo",
+      "url": "https://github.com/rauhan-sheikh/BusinessOS"
+    },
+    {
+      "label": "Live Demo",
+      "url": "https://businessos.rauhansheikh.com"
+    }
+  ],
+  "showOnResume": true,
+  "resumeBlurb": "Personal project: a multi-tenant financial system built on a precision-safe double-entry ledger (integer minor units, immutable journals, audit-safe history)."
+}
