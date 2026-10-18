@@ -14,6 +14,7 @@ tags:
   - Optimization
 isFeatured: false
 isPublished: true
+seoTitle: What Database Indexing Actually Changed in Production
 coverImage: /articles/indexing.png
 ---
 ## The Symptom: Monday Morning Latency

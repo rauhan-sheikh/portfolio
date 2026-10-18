@@ -20,9 +20,12 @@ import { pageMetadata } from "@/lib/seo";
 import TeamsArchitectureStory from "@/components/public/TeamsArchitectureStory";
 import BulkEmailArchitectureStory from "@/components/public/BulkEmailArchitectureStory";
 
-export const metadata = {
-  alternates: { canonical: "/" },
-};
+export const metadata = pageMetadata({
+  title: { absolute: "Rauhan Sheikh — Software Developer" },
+  description:
+    "Rauhan Sheikh is a software developer building reliable backends, resilient database architecture, and web software that has to actually work.",
+  path: "/",
+});
 
 export const revalidate = 0; // Dynamic server component
 

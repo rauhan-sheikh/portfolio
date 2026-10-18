@@ -40,7 +40,8 @@ export function pageMetadata({
       title: shareTitle,
       description: desc,
       type,
-      url: path,
+      // Next drops a bare "/" here, so the homepage needs the absolute URL for og:url to render.
+      url: path === "/" ? SITE_URL : path,
       siteName: SITE_NAME,
       locale: "en_US",
       ...extra,

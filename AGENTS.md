@@ -21,6 +21,8 @@ Resend email. Package manager is **pnpm**.
 | Seed a fresh DB | `ADMIN_DEFAULT_PASSWORD=... pnpm db:seed` (admin user + `content/site/*`) |
 | Preview with no database | `pnpm preview` (in-memory Postgres, seeded from `content/site`, `next dev` on :3111) |
 | Check the generated résumé is one page | `pnpm resume:check` (with `pnpm preview` running) |
+| Audit a running site (SEO, sitemap, canonicals) | `pnpm audit:site [url]` |
+| Extract your own updates from a Teams export | `pnpm teams:extract <export>` (see docs/UPDATING.md) |
 | Capture live content into files | `pnpm content:pull` (needs the live `DATABASE_URL`) |
 | Apply files to a DB | `pnpm content:push` (dry run) / `pnpm content:push --yes` |
 
@@ -90,6 +92,12 @@ content/site/
   deletes rows, and never touches `newsletterSentAt`. **Only the owner runs it against production, after the PR is
   merged.**
 - `prisma/seed.ts` creates the admin user and then runs `content:push --yes`, so a fresh database equals the repo.
+
+## Periodic updates
+
+Run `/update-site <label>` (a Claude Code slash command in `.claude/commands/`) every month or quarter, and
+`/new-essay` for writing. The full routine, including what the owner runs after merging, is in
+`docs/UPDATING.md`. The agent must never run `content:push` against production or merge the PR.
 
 ## Before you open a PR
 

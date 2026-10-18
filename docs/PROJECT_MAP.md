@@ -63,6 +63,9 @@ resume (summary, location, phone switch, PDF with phone via `/api/admin/resume.p
 | `pnpm preview` (`scripts/preview.mjs`) | In-memory Postgres (PGlite) + migrate + seed + `next dev` on :3111. `--db-only`, `--no-seed` available. |
 | `prisma/seed.ts` | Admin user, then `content:push --yes`. |
 | `pnpm resume:check [url]` (`scripts/check-resume.ts`) | Fetches the generated PDF and fails unless it is exactly one page. Needs `pnpm preview` running (or pass the production URL). |
+| `pnpm audit:site [url]` (`scripts/site-audit.ts`) | Read-only audit of every sitemap URL: status, one h1, title and description length, canonical, og:url/image, JSON-LD. |
+| `pnpm teams:extract` (`scripts/teams-extract.ts`) | Extracts the owner's own updates from a Teams export into `private/` (gitignored), dropping credential-looking messages. |
+| `.claude/commands/update-site.md`, `new-essay.md` | The `/update-site` and `/new-essay` slash commands; see `docs/UPDATING.md`. |
 | `scripts/repair-visibility.ts` | Re-list projects hidden by the old admin bug; dry run unless `--yes`. |
 | `scripts/change-password.ts` | Change the admin password. |
 

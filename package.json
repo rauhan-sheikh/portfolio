@@ -16,6 +16,8 @@
     "content:push": "tsx scripts/content-push.ts",
     "preview": "node scripts/preview.mjs",
     "resume:check": "tsx scripts/check-resume.ts",
+    "audit:site": "tsx scripts/site-audit.ts",
+    "teams:extract": "tsx scripts/teams-extract.ts",
     "admin:password": "tsx scripts/change-password.ts"
   },
   "prisma": {

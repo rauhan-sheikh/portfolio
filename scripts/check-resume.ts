@@ -4,6 +4,8 @@
  *   default url: http://localhost:3111/resume.pdf  (start `pnpm preview` first)
  *   production:  pnpm resume:check https://rauhansheikh.com/resume.pdf
  */
+export {};
+
 async function main() {
   const url = process.argv[2] || "http://localhost:3111/resume.pdf";
   const res = await fetch(url);
