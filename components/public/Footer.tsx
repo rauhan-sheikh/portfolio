@@ -77,11 +77,11 @@ export default function Footer() {
             </p>
             <div className="flex flex-col space-y-2 text-sm text-secondary">
               <a
-                href="mailto:hello@rauhan_sheikh.com"
+                href="mailto:hello@rauhansheikh.com"
                 className="hover:text-accent transition-colors flex items-center gap-2"
               >
                 <Mail className="h-4 w-4" />
-                <span>hello@rauhan_sheikh.com</span>
+                <span>hello@rauhansheikh.com</span>
               </a>
               <a
                 href="https://github.com/rauhan-sheikh"
