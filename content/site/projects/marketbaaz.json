@@ -3,7 +3,7 @@
   "slug": "marketbaaz",
   "category": "PROFESSIONAL",
   "year": "2026",
-  "shortDesc": "Helps Amazon sellers decide what to sell: a Chrome extension and web app (formerly BrandForge) that turn marketplace data into clear insight, and never show a number the evidence can't support.",
+  "shortDesc": "Helps Amazon sellers decide what to sell: a Chrome extension and web app that turn marketplace data into clear insight, and never show a number the evidence can't support.",
   "longDesc": "MarketBaaz helps Amazon sellers research and validate products. A Chrome extension overlays sales, revenue and opportunity insight on Amazon pages, and a web app adds product, brand and seller research, keyword tools, an AI brand-building suite and billing. I am the sole engineer: I took it from a waitlist to a public launch and built the extension, data pipeline, backend, payments and infrastructure.",
   "status": "PUBLISHED",
   "isFeatured": true,
