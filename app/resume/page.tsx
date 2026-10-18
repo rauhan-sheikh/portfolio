@@ -7,6 +7,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Resume — Rauhan Sheikh",
   description: "Curriculum Vitae and technical competencies of Rauhan Sheikh, Software Developer.",
+  alternates: { canonical: "/resume" },
 };
 
 export const revalidate = 0;

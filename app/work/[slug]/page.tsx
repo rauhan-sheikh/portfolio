@@ -29,14 +29,25 @@ export async function generateMetadata({
     where: { slug },
   });
 
-  if (!project) {
-    return { title: "Project Not Found" };
+  if (!project || project.status === "PRIVATE") {
+    return { title: "Project Not Found", robots: { index: false, follow: false } };
   }
 
+  const url = `/work/${project.slug}`;
+  const title = `${project.title} — Case Study | Rauhan Sheikh`;
   return {
-    title: `${project.title} — Case Study | Rauhan Sheikh`,
+    title,
     description: project.shortDesc,
+    alternates: { canonical: url },
     openGraph: {
+      title: `${project.title} — Rauhan Sheikh`,
+      description: project.shortDesc,
+      type: "article",
+      url,
+      siteName: "Rauhan Sheikh",
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${project.title} — Rauhan Sheikh`,
       description: project.shortDesc,
     },

@@ -7,6 +7,7 @@ import ContactForm from "@/components/public/ContactForm";
 export const metadata = {
   title: "Contact — Rauhan Sheikh",
   description: "Get in touch with Rauhan Sheikh for engineering opportunities, backend architecture, or consulting.",
+  alternates: { canonical: "/contact" },
 };
 
 export const revalidate = 0;

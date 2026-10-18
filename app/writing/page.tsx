@@ -6,6 +6,7 @@ import { ArrowRight, Calendar, Clock, BookOpen, Tag } from "lucide-react";
 export const metadata = {
   title: "Writing & Technical Essays — Rauhan Sheikh",
   description: "Technical essays and engineering post-mortems on BullMQ queues, database indexing, financial ledgers, and API architecture.",
+  alternates: { canonical: "/writing" },
 };
 
 export const revalidate = 0;

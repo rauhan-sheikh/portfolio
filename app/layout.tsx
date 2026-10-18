@@ -11,8 +11,10 @@ export const metadata: Metadata = {
   description:
     "Personal Brand Platform for Rauhan Sheikh. I build things, break things, figure things out, and ship them. Focused on backend reliability, database architecture, and resilient web software.",
   metadataBase: new URL("https://rauhansheikh.com"),
-  alternates: {
-    canonical: "https://rauhansheikh.com",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
   openGraph: {
     title: "Rauhan Sheikh — Software Developer",
@@ -98,6 +100,8 @@ export default async function RootLayout({
         "@id": "https://rauhansheikh.com/#website",
         url: "https://rauhansheikh.com",
         name: "Rauhan Sheikh",
+        description: "Software developer focused on backend reliability, database architecture, and resilient web software.",
+        inLanguage: "en",
         publisher: {
           "@id": "https://rauhansheikh.com/#person",
         },
