@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 import { db } from "@/lib/db";
 import { SITE_URL } from "@/lib/seo";
 
+// Rebuilt at most hourly so new/hidden content tracks the database instead of the last deploy.
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
   const currentDate = new Date();

@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default async function LegacyProjectPage({
   params,
@@ -6,5 +6,5 @@ export default async function LegacyProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  redirect(`/work/${slug}`);
+  permanentRedirect(`/work/${slug}`);
 }

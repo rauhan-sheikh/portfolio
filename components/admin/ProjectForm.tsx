@@ -33,6 +33,8 @@ export default function ProjectForm({ initialData, isNew = false }: ProjectFormP
   const [longDesc, setLongDesc] = useState(initialData?.longDesc || "");
   const [status, setStatus] = useState(initialData?.status || "PUBLISHED");
   const [isFeatured, setIsFeatured] = useState(Boolean(initialData?.isFeatured));
+  const [showOnHome, setShowOnHome] = useState(initialData?.showOnHome ?? true);
+  const [showInWork, setShowInWork] = useState(initialData?.showInWork ?? true);
   const [order, setOrder] = useState(initialData?.order || 0);
 
   // Identity & Styling
@@ -147,6 +149,8 @@ export default function ProjectForm({ initialData, isNew = false }: ProjectFormP
       longDesc,
       status,
       isFeatured,
+      showOnHome,
+      showInWork,
       order: Number(order),
       accentColor,
       projectMark,
@@ -327,6 +331,33 @@ export default function ProjectForm({ initialData, isNew = false }: ProjectFormP
               className="w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-900 text-slate-100 focus:outline-hidden focus:border-blue-500"
               placeholder="1"
             />
+          </div>
+        </div>
+
+        <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="showInWork"
+              checked={showInWork}
+              onChange={(e) => setShowInWork(e.target.checked)}
+              className="h-4 w-4 rounded border-slate-700 bg-slate-900 text-blue-600 focus:ring-0"
+            />
+            <label htmlFor="showInWork" className="text-slate-300 cursor-pointer font-semibold">
+              List in the Work directory
+            </label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="showOnHome"
+              checked={showOnHome}
+              onChange={(e) => setShowOnHome(e.target.checked)}
+              className="h-4 w-4 rounded border-slate-700 bg-slate-900 text-blue-600 focus:ring-0"
+            />
+            <label htmlFor="showOnHome" className="text-slate-300 cursor-pointer font-semibold">
+              Show on the homepage
+            </label>
           </div>
         </div>
 

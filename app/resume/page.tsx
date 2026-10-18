@@ -18,7 +18,7 @@ export default async function ResumePage() {
   const [experiences, settingsList, projects] = await Promise.all([
     db.experience.findMany({ orderBy: { order: "asc" } }),
     db.siteSetting.findMany(),
-    db.project.findMany({ where: { isFeatured: true }, orderBy: { order: "asc" } }),
+    db.project.findMany({ where: { isFeatured: true, status: "PUBLISHED" }, orderBy: { order: "asc" } }),
   ]);
 
   const settings: Record<string, string> = {};
