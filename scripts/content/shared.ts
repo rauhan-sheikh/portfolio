@@ -42,7 +42,7 @@ export const EDUCATION_FIELDS = ["institution", "degree", "period", "detail", "o
 /** Settings that live only in the database (never written to files / git). */
 export const DB_ONLY_SETTINGS = new Set(["resume_phone"]);
 
-export const NOW_FIELDS = ["category", "title", "text", "order", "isActive"] as const;
+export const NOW_FIELDS = ["category", "title", "text", "url", "order", "isActive"] as const;
 export const PERSONALITY_FIELDS = ["category", "title", "body", "order"] as const;
 export const NAVIGATION_FIELDS = ["label", "href", "order", "isEnabled", "isExternal"] as const;
 

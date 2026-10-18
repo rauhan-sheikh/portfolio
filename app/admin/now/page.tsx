@@ -5,9 +5,10 @@ import { PlusCircle, Edit3, Trash2, Clock, CheckCircle2, X } from "lucide-react"
 
 interface NowItem {
   id: string;
-  category: "BUILDING" | "LEARNING" | "READING" | "EXPERIMENTING" | "THINKING";
+  category: "BUILDING" | "LEARNING" | "READING" | "EXPERIMENTING" | "THINKING" | "LISTENING" | "WATCHING";
   title: string;
   text: string;
+  url?: string | null;
   order: number;
   isActive: boolean;
 }
@@ -136,6 +137,8 @@ export default function AdminNowPage() {
                   <option value="READING">Reading</option>
                   <option value="THINKING">Thinking</option>
                   <option value="EXPERIMENTING">Experimenting</option>
+                  <option value="LISTENING">Listening (podcast)</option>
+                  <option value="WATCHING">Watching (video)</option>
                 </select>
               </div>
 
@@ -171,6 +174,17 @@ export default function AdminNowPage() {
                 onChange={(e) => setEditingItem({ ...editingItem, text: e.target.value })}
                 className="w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-900 text-slate-100 focus:outline-hidden font-body text-xs leading-relaxed"
                 placeholder="Currently reading Designing Data-Intensive Applications..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-slate-300 mb-1 font-semibold">Link (optional)</label>
+              <input
+                type="url"
+                value={editingItem.url || ""}
+                onChange={(e) => setEditingItem({ ...editingItem, url: e.target.value })}
+                className="w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-900 text-slate-100 focus:outline-hidden font-body text-sm"
+                placeholder="https://… (turns the item into a recommendation)"
               />
             </div>
 

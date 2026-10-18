@@ -1,13 +1,13 @@
 import React from "react";
 import { db } from "@/lib/db";
 import Link from "next/link";
-import { Clock, Hammer, BookOpen, Brain, Sparkles, Compass } from "lucide-react";
+import { Hammer, BookOpen, Brain, Sparkles, Compass, Headphones, PlayCircle, ArrowUpRight } from "lucide-react";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Now — Rauhan Sheikh",
   description:
-    "What Rauhan Sheikh is currently building, reading, learning, and thinking about.",
+    "What Rauhan Sheikh is building, learning and thinking about right now, plus the blogs, podcasts and videos worth your time.",
   path: "/now",
 });
 
@@ -29,10 +29,23 @@ export default async function NowPage() {
         return Brain;
       case "EXPERIMENTING":
         return Sparkles;
+      case "LISTENING":
+        return Headphones;
+      case "WATCHING":
+        return PlayCircle;
       default:
         return Compass;
     }
   };
+
+  // Narrative items are big cards; items with a link are recommendations, grouped below.
+  const narrative = items.filter((i) => !i.url);
+  const resources = items.filter((i) => i.url);
+  const groups = [
+    { category: "READING", heading: "Blogs worth reading" },
+    { category: "LISTENING", heading: "Podcasts worth hearing" },
+    { category: "WATCHING", heading: "Videos worth watching" },
+  ] as const;
 
   return (
     <div className="pt-28 pb-20 max-w-4xl mx-auto px-4 sm:px-6 space-y-16 font-body">
@@ -52,7 +65,7 @@ export default async function NowPage() {
 
       {/* Living Items */}
       <div className="space-y-8">
-        {items.map((item) => {
+        {narrative.map((item) => {
           const Icon = getCategoryIcon(item.category);
           return (
             <div
@@ -75,6 +88,54 @@ export default async function NowPage() {
           );
         })}
       </div>
+
+      {/* Recommendations */}
+      {resources.length > 0 && (
+        <section className="space-y-6">
+          <div className="space-y-1 border-b border-border/60 pb-3">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-accent">
+              // Worth your time
+            </h2>
+            <p className="text-sm text-secondary">
+              The blogs, podcasts and videos I actually learn from. Short, practical and free.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {groups.map((g) => {
+              const list = resources.filter((r) => r.category === g.category);
+              if (list.length === 0) return null;
+              const Icon = getCategoryIcon(g.category);
+              return (
+                <div key={g.category} className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-secondary">
+                    <Icon className="h-4 w-4 text-accent" />
+                    <span>{g.heading}</span>
+                  </div>
+                  <ul className="space-y-3">
+                    {list.map((r) => (
+                      <li key={r.id}>
+                        <a
+                          href={r.url!}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="group block p-4 rounded-xl border border-border bg-surface/50 hover:bg-surface hover:border-accent/60 transition-colors"
+                        >
+                          <span className="flex items-center justify-between gap-2 font-heading font-semibold text-primary group-hover:text-accent">
+                            {r.title}
+                            <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-60" />
+                          </span>
+                          <span className="block text-xs text-secondary leading-relaxed mt-1">{r.text}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       <div className="p-6 rounded-xl border border-border/60 bg-surface/30 font-mono text-xs text-secondary flex items-center justify-between">
         <span>Location: India · UTC+05:30</span>

@@ -12,7 +12,8 @@ A guide to where everything on rauhansheikh.com comes from. Rules for changing i
 | `/work/[slug]` | `app/work/[slug]/page.tsx` | DB: one project | Only `PUBLISHED` projects render. Two slugs have bespoke diagrams (`TeamsArchitectureStory`, `BulkEmailArchitectureStory`). |
 | `/writing` | `app/writing/page.tsx` | DB: published articles | |
 | `/writing/[slug]` | `app/writing/[slug]/page.tsx` | DB: one article (Markdown body) | Emits `BlogPosting` + `BreadcrumbList` JSON-LD. |
-| `/now` | `app/now/page.tsx` | DB: active now items | Categories: Building, Learning, Reading, Thinking, Experimenting. |
+| `/now` | `app/now/page.tsx` | DB: active now items | Narrative items (no link) are cards; items with a `url` are grouped as Blogs (READING), Podcasts (LISTENING) and Videos (WATCHING). Retire an item by setting `isActive: false` in `content/site/now.json` (push never deletes). |
+| `/feed.xml` | `app/feed.xml/route.ts` | DB: published articles | RSS 2.0, advertised in page metadata and the footer. |
 | `/experience` | `app/experience/page.tsx` | DB: experiences + project titles for links | |
 | `/about` | `app/about/page.tsx` | DB: personality items; story text is hard-coded | |
 | `/resume` | `app/resume/page.tsx` | `getResumeData()` in `lib/resume.ts` | Same data as the PDF. Skills and education come from `SkillGroup` / `Education`; per-role short bullets from `Experience.resumeBullets`. |
