@@ -1,5 +1,6 @@
 import { PrismaClient, Role, ProjectCategory, ProjectStatus, NowCategory, PersonalityCategory } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { prosyncExperience, prosyncProjects, projectOrder, prosyncNowItem } from "./content/prosync";
 
 const prisma = new PrismaClient();
 
@@ -314,38 +315,22 @@ Building client software requires a different muscle than internal tools: you ar
     },
   ];
 
-  for (const p of projectsData) {
+  const allProjects = [...projectsData, ...prosyncProjects];
+  for (const p of allProjects) {
     await prisma.project.upsert({
       where: { slug: p.slug },
       update: p,
       create: p,
     });
   }
-  console.log(`✓ Seeded ${projectsData.length} projects`);
+  for (const [slug, order] of Object.entries(projectOrder)) {
+    await prisma.project.updateMany({ where: { slug }, data: { order } });
+  }
+  console.log(`✓ Seeded ${allProjects.length} projects`);
 
   // 3. Experience
   const experienceData = [
-    {
-      company: "ProSync Infotech",
-      role: "Software Developer",
-      location: "India",
-      startDate: "2026",
-      endDate: "Present",
-      isCurrent: true,
-      description: "Architecting enterprise software solutions, focusing on backend performance, distributed systems, and robust web applications.",
-      bullets: JSON.stringify([
-        "Designing and developing high-throughput microservices and APIs with TypeScript and Node.js.",
-        "Collaborating with clients and product leadership to translate complex domain specifications into scalable software.",
-        "Championing database indexing strategies and query optimizations across PostgreSQL databases.",
-      ]),
-      technologies: JSON.stringify(["TypeScript", "Node.js", "PostgreSQL", "Next.js", "Docker", "Redis"]),
-      metrics: JSON.stringify([
-        { label: "Focus", value: "Enterprise Architecture" },
-        { label: "Stack", value: "Node.js · PostgreSQL · Next.js" },
-      ]),
-      linkedProjects: JSON.stringify([]),
-      order: 1,
-    },
+    prosyncExperience,
     {
       company: "Blackboard E-Learning Pvt Ltd (College Vidya)",
       role: "Software Developer & Associate Manager",
@@ -584,8 +569,8 @@ That curiosity is what led from basic scripts to writing full-stack systems, man
   const nowData = [
     {
       category: NowCategory.BUILDING,
-      title: "Enterprise Systems at ProSync & BusinessOS",
-      text: "Architecting high-throughput backend services at ProSync Infotech and refining the double-entry immutable ledger engine for BusinessOS.",
+      title: prosyncNowItem.title,
+      text: prosyncNowItem.text,
       order: 1,
       isActive: true,
     },

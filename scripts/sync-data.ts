@@ -62,17 +62,7 @@ Building client software requires a different muscle than internal tools: you ar
   });
   console.log(`✅ Upserted project: ${project.title} (${project.slug})`);
 
-  // 2. Detach BusinessOS from ProSync Infotech
-  const prosync = await prisma.experience.findFirst({
-    where: { company: { contains: "ProSync", mode: "insensitive" } },
-  });
-  if (prosync) {
-    await prisma.experience.update({
-      where: { id: prosync.id },
-      data: { linkedProjects: JSON.stringify([]) },
-    });
-    console.log(`✅ Detached BusinessOS from ProSync Infotech experience`);
-  }
+  // 2. (Removed) BusinessOS detach: ProSync links now come from scripts/sync-prosync.ts
 
   // 3. Attach Akshta Enterprises to Freelance Web Developer
   const freelance = await prisma.experience.findFirst({

@@ -61,7 +61,7 @@ export default async function AboutPage() {
           </p>
 
           <p>
-            Today, as a Software Developer at ProSync Infotech, I focus on the parts of systems that have to actually work: data integrity, idempotent API boundaries, predictable database migrations, and clean developer abstractions.
+            Today, as a Software Developer at ProSync Infotech Private Limited, I build MarketBaaz (an Amazon seller-intelligence web app and Chrome extension), an internal Workforce HRMS with a desktop app, and an internal CRM, all connected through our own APIs. I focus on the parts of systems that have to actually work: honest data, idempotent API boundaries, predictable migrations, and releases that can be rolled back.
           </p>
         </div>
       </section>
