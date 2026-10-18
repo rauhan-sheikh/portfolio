@@ -18,16 +18,32 @@ export async function generateMetadata({
     where: { slug },
   });
 
-  if (!article) return { title: "Article Not Found" };
+  if (!article || !article.isPublished) {
+    return { title: "Article Not Found", robots: { index: false, follow: false } };
+  }
 
+  const url = `/writing/${article.slug}`;
+  const title = article.seoTitle || `${article.title} — Rauhan Sheikh`;
+  const description = article.seoDesc || article.excerpt;
   return {
-    title: `${article.title} — Rauhan Sheikh`,
-    description: article.excerpt,
+    title,
+    description,
+    alternates: { canonical: url },
+    authors: [{ name: article.author }],
     openGraph: {
-      title: article.title,
-      description: article.excerpt,
+      title: article.seoTitle || article.title,
+      description,
       type: "article",
+      url,
+      siteName: "Rauhan Sheikh",
       publishedTime: article.publishedAt.toISOString(),
+      modifiedTime: article.updatedAt.toISOString(),
+      authors: [article.author],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.seoTitle || article.title,
+      description,
     },
   };
 }
@@ -62,6 +78,24 @@ export default async function ArticleDetailPage({
 
   return (
     <article className="pt-28 pb-20 max-w-3xl mx-auto px-4 sm:px-6 space-y-12 font-body">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: article.title,
+            description: article.seoDesc || article.excerpt,
+            datePublished: article.publishedAt.toISOString(),
+            dateModified: article.updatedAt.toISOString(),
+            url: `https://rauhansheikh.com/writing/${article.slug}`,
+            mainEntityOfPage: `https://rauhansheikh.com/writing/${article.slug}`,
+            keywords: tags.join(", "),
+            author: { "@id": "https://rauhansheikh.com/#person" },
+            publisher: { "@id": "https://rauhansheikh.com/#person" },
+          }),
+        }}
+      />
       {/* Back button */}
       <div>
         <Link

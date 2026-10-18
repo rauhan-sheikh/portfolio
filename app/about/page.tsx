@@ -6,6 +6,7 @@ import { ArrowRight, Terminal, Heart, Eye, Flame, Compass, ArrowUpRight } from "
 export const metadata = {
   title: "About & Story — Rauhan Sheikh",
   description: "The honest career journey from operations to software engineering, principles, and personality.",
+  alternates: { canonical: "/about" },
 };
 
 export const revalidate = 0;

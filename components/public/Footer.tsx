@@ -102,13 +102,13 @@ export default function Footer() {
                 <span>linkedin.com/in/rauhan-sheikh</span>
               </a>
               <a
-                href="https://x.com/rauhansheikh"
+                href="https://x.com/rauhan_sheikh"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-accent transition-colors flex items-center gap-2"
               >
                 <Twitter className="h-4 w-4" />
-                <span>x.com/rauhansheikh</span>
+                <span>x.com/rauhan_sheikh</span>
               </a>
             </div>
           </div>

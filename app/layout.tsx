@@ -11,8 +11,10 @@ export const metadata: Metadata = {
   description:
     "Personal Brand Platform for Rauhan Sheikh. I build things, break things, figure things out, and ship them. Focused on backend reliability, database architecture, and resilient web software.",
   metadataBase: new URL("https://rauhansheikh.com"),
-  alternates: {
-    canonical: "https://rauhansheikh.com",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
   openGraph: {
     title: "Rauhan Sheikh — Software Developer",
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rauhan Sheikh — Software Developer",
     description: "Building the parts of software that have to actually work.",
-    creator: "@rauhansheikh",
+    creator: "@rauhan_sheikh",
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
@@ -90,7 +92,7 @@ export default async function RootLayout({
         sameAs: [
           "https://github.com/rauhan-sheikh",
           "https://linkedin.com/in/rauhan-sheikh",
-          "https://x.com/rauhansheikh",
+          "https://x.com/rauhan_sheikh",
         ],
       },
       {
@@ -98,6 +100,8 @@ export default async function RootLayout({
         "@id": "https://rauhansheikh.com/#website",
         url: "https://rauhansheikh.com",
         name: "Rauhan Sheikh",
+        description: "Software developer focused on backend reliability, database architecture, and resilient web software.",
+        inLanguage: "en",
         publisher: {
           "@id": "https://rauhansheikh.com/#person",
         },

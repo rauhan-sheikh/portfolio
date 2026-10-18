@@ -6,6 +6,7 @@ import { ArrowRight, Calendar, MapPin, Layers, Briefcase, Award } from "lucide-r
 export const metadata = {
   title: "Experience & Track Record — Rauhan Sheikh",
   description: "Career timeline, growth of responsibility, and technical systems shipped by Rauhan Sheikh.",
+  alternates: { canonical: "/experience" },
 };
 
 export const revalidate = 0;

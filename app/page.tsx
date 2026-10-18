@@ -19,6 +19,10 @@ import { Github } from "@/components/public/Icons";
 import TeamsArchitectureStory from "@/components/public/TeamsArchitectureStory";
 import BulkEmailArchitectureStory from "@/components/public/BulkEmailArchitectureStory";
 
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 export const revalidate = 0; // Dynamic server component
 
 export default async function HomePage() {

@@ -5,6 +5,7 @@ import WorkDirectory from "@/components/public/WorkDirectory";
 export const metadata = {
   title: "Work & Systems — Rauhan Sheikh",
   description: "Explore commercial-grade software, financial ledgers, and distributed systems built by Rauhan Sheikh.",
+  alternates: { canonical: "/work" },
 };
 
 export const revalidate = 0;
