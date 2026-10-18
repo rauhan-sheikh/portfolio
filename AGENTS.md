@@ -1,7 +1,8 @@
 # AGENTS.md — rauhansheikh.com
 
 Instructions for any AI agent (and human) working in this repo. Read this first, then
-[docs/PROJECT_MAP.md](docs/PROJECT_MAP.md) for where everything lives.
+[docs/PROJECT_MAP.md](docs/PROJECT_MAP.md) for where everything lives and
+[docs/EDITING_GUIDE.md](docs/EDITING_GUIDE.md) for which file to edit to change what.
 
 This is Rauhan Sheikh's personal portfolio: a Next.js App Router site backed by PostgreSQL (Prisma),
 deployed on Vercel at `https://rauhansheikh.com` (the apex is the canonical host; `www` redirects to it).
