@@ -59,7 +59,13 @@ export default function ResumeDocument({ data }: { data: ResumeData }) {
   const { contact } = data;
   const parts: React.ReactNode[] = [
     contact.location,
-    ...(contact.phone ? [contact.phone] : []),
+    ...(contact.phone
+      ? [
+          <Link key="tel" src={`tel:${contact.phone.replace(/[^\d+]/g, "")}`} style={styles.link}>
+            {contact.phone}
+          </Link>,
+        ]
+      : []),
     <Link key="mail" src={`mailto:${contact.email}`} style={styles.link}>{contact.email}</Link>,
     <Link key="li" src={contact.linkedin} style={styles.link}>LinkedIn</Link>,
     <Link key="gh" src={contact.github} style={styles.link}>GitHub</Link>,
