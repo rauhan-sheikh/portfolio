@@ -21,5 +21,7 @@
   "site_name": "Rauhan Sheikh",
   "site_tagline": "I like building the parts of software that have to actually work.",
   "site_title": "Rauhan Sheikh — Software Developer & Builder",
+  "snapshot_items": "[{\"label\":\"Public product, solo\",\"text\":\"Took MarketBaaz, a tool that helps Amazon sellers decide what to sell, from waitlist to public launch as its only engineer.\"},{\"label\":\"Senior dev, small team\",\"text\":\"Built an internal HR platform with a desktop app, and a CRM, as the senior developer on a two-person team.\"},{\"label\":\"Reliability first\",\"text\":\"Estimates that admit when they don't know, releases that can be reversed, and servers I run myself.\"}]",
+  "snapshot_stack": "TypeScript · Next.js · MongoDB",
   "twitter_url": "https://x.com/rauhan_sheikh"
 }

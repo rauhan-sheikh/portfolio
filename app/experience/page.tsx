@@ -39,7 +39,7 @@ export default async function ExperiencePage() {
           Track Record & Experience
         </h1>
         <p className="text-base sm:text-lg text-secondary leading-relaxed">
-          Growth of technical responsibility: earning ownership through deep investigation, architecting background job pipelines, and scaling systems for 20,000+ users.
+          Growth of technical responsibility: from scaling a 20,000-student learning platform to running three connected products at ProSync.
         </p>
       </div>
 
