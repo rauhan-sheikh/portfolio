@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rauhan Sheikh — Software Developer",
     description: "Building the parts of software that have to actually work.",
-    creator: "@rauhansheikh",
+    creator: "@rauhan_sheikh",
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
@@ -92,7 +92,7 @@ export default async function RootLayout({
         sameAs: [
           "https://github.com/rauhan-sheikh",
           "https://linkedin.com/in/rauhan-sheikh",
-          "https://x.com/rauhansheikh",
+          "https://x.com/rauhan_sheikh",
         ],
       },
       {
