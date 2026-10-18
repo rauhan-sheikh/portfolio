@@ -2,12 +2,14 @@ import React from "react";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { ArrowRight, Terminal, Heart, Eye, Flame, Compass, ArrowUpRight } from "lucide-react";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "About & Story — Rauhan Sheikh",
-  description: "The honest career journey from operations to software engineering, principles, and personality.",
-  alternates: { canonical: "/about" },
-};
+  description:
+    "The honest career journey from operations to software engineering, principles, and personality.",
+  path: "/about",
+});
 
 export const revalidate = 0;
 

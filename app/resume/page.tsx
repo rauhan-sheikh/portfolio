@@ -3,12 +3,14 @@ import { db } from "@/lib/db";
 import { Download, ExternalLink, Calendar, MapPin, Mail, Award, Briefcase } from "lucide-react";
 import { Github, Linkedin } from "@/components/public/Icons";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Resume — Rauhan Sheikh",
-  description: "Curriculum Vitae and technical competencies of Rauhan Sheikh, Software Developer.",
-  alternates: { canonical: "/resume" },
-};
+  description:
+    "Curriculum Vitae and technical competencies of Rauhan Sheikh, Software Developer.",
+  path: "/resume",
+});
 
 export const revalidate = 0;
 

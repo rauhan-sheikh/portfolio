@@ -1,12 +1,14 @@
 import React from "react";
 import { db } from "@/lib/db";
 import WorkDirectory from "@/components/public/WorkDirectory";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Work & Systems — Rauhan Sheikh",
-  description: "Explore commercial-grade software, financial ledgers, and distributed systems built by Rauhan Sheikh.",
-  alternates: { canonical: "/work" },
-};
+  description:
+    "Explore commercial-grade software, financial ledgers, and distributed systems built by Rauhan Sheikh.",
+  path: "/work",
+});
 
 export const revalidate = 0;
 

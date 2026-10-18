@@ -5,12 +5,13 @@ import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 import CommandPalette from "@/components/public/CommandPalette";
 import { db } from "@/lib/db";
+import { SITE_URL, SITE_NAME } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Rauhan Sheikh — Software Developer",
   description:
-    "Personal Brand Platform for Rauhan Sheikh. I build things, break things, figure things out, and ship them. Focused on backend reliability, database architecture, and resilient web software.",
-  metadataBase: new URL("https://rauhansheikh.com"),
+    "Rauhan Sheikh is a software developer building reliable backends, resilient database architecture, and web software that has to actually work.",
+  metadataBase: new URL(SITE_URL),
   robots: {
     index: true,
     follow: true,
@@ -19,15 +20,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Rauhan Sheikh — Software Developer",
     description:
-      "Personal Brand Platform for Rauhan Sheikh. Building the parts of software that have to actually work.",
+      "Rauhan Sheikh is a software developer building reliable backends, resilient database architecture, and web software that has to actually work.",
     type: "website",
-    url: "https://rauhansheikh.com",
-    siteName: "Rauhan Sheikh",
+    siteName: SITE_NAME,
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Rauhan Sheikh — Software Developer",
-    description: "Building the parts of software that have to actually work.",
+    description:
+      "Rauhan Sheikh is a software developer building reliable backends, resilient database architecture, and web software that has to actually work.",
     creator: "@rauhan_sheikh",
   },
   verification: {
@@ -84,10 +86,11 @@ export default async function RootLayout({
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://rauhansheikh.com/#person",
+        "@id": `${SITE_URL}/#person`,
         name: "Rauhan Sheikh",
-        url: "https://rauhansheikh.com",
+        url: SITE_URL,
         jobTitle: "Software Developer",
+        image: `${SITE_URL}/avatar-tile.png`,
         description: "Software developer focused on backend reliability, database architecture, and resilient web software.",
         sameAs: [
           "https://github.com/rauhan-sheikh",
@@ -97,13 +100,13 @@ export default async function RootLayout({
       },
       {
         "@type": "WebSite",
-        "@id": "https://rauhansheikh.com/#website",
-        url: "https://rauhansheikh.com",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
         name: "Rauhan Sheikh",
         description: "Software developer focused on backend reliability, database architecture, and resilient web software.",
         inLanguage: "en",
         publisher: {
-          "@id": "https://rauhansheikh.com/#person",
+          "@id": `${SITE_URL}/#person`,
         },
       },
     ],

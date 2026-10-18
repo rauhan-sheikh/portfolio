@@ -2,12 +2,14 @@ import React from "react";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { Clock, Hammer, BookOpen, Brain, Sparkles, Compass } from "lucide-react";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Now — Rauhan Sheikh",
-  description: "What Rauhan Sheikh is currently building, reading, learning, and thinking about.",
-  alternates: { canonical: "/now" },
-};
+  description:
+    "What Rauhan Sheikh is currently building, reading, learning, and thinking about.",
+  path: "/now",
+});
 
 export const revalidate = 0;
 

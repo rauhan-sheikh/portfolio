@@ -16,6 +16,7 @@ import { Github } from "@/components/public/Icons";
 import TeamsArchitectureStory from "@/components/public/TeamsArchitectureStory";
 import BulkEmailArchitectureStory from "@/components/public/BulkEmailArchitectureStory";
 import Markdown from "@/components/public/Markdown";
+import { SITE_URL, pageMetadata, fitTitle, breadcrumbJsonLd } from "@/lib/seo";
 
 export const revalidate = 0;
 
@@ -33,25 +34,19 @@ export async function generateMetadata({
     return { title: "Project Not Found", robots: { index: false, follow: false } };
   }
 
-  const url = `/work/${project.slug}`;
-  const title = `${project.title} — Case Study | Rauhan Sheikh`;
-  return {
-    title,
+  return pageMetadata({
+    title: {
+      absolute: fitTitle(
+        `${project.title} — Case Study | Rauhan Sheikh`,
+        `${project.title} — Rauhan Sheikh`,
+        project.title
+      ),
+    },
     description: project.shortDesc,
-    alternates: { canonical: url },
-    openGraph: {
-      title: `${project.title} — Rauhan Sheikh`,
-      description: project.shortDesc,
-      type: "article",
-      url,
-      siteName: "Rauhan Sheikh",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${project.title} — Rauhan Sheikh`,
-      description: project.shortDesc,
-    },
-  };
+    path: `/work/${project.slug}`,
+    type: "article",
+    ogTitle: `${project.title} — Rauhan Sheikh`,
+  });
 }
 
 export default async function ProjectCaseStudyPage({
@@ -88,6 +83,32 @@ export default async function ProjectCaseStudyPage({
 
   return (
     <article className="pt-28 pb-20 max-w-4xl mx-auto px-4 sm:px-6 space-y-16 font-body">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              name: project.title,
+              description: project.shortDesc,
+              url: `${SITE_URL}/work/${project.slug}`,
+              mainEntityOfPage: `${SITE_URL}/work/${project.slug}`,
+              image: `${SITE_URL}/work/${project.slug}/opengraph-image`,
+              ...(project.year ? { dateCreated: project.year } : {}),
+              keywords: stackList.join(", "),
+              genre: project.category,
+              author: { "@id": `${SITE_URL}/#person` },
+              creator: { "@id": `${SITE_URL}/#person` },
+            },
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Work", path: "/work" },
+              { name: project.title, path: `/work/${project.slug}` },
+            ]),
+          ]),
+        }}
+      />
       {/* Back button */}
       <div>
         <Link

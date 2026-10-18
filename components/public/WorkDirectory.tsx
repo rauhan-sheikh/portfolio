@@ -111,9 +111,9 @@ export default function WorkDirectory({ projects }: { projects: ProjectItem[] })
                   </div>
 
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold font-heading text-primary group-hover:text-accent transition-colors tracking-tight">
+                    <h2 className="text-xl sm:text-2xl font-bold font-heading text-primary group-hover:text-accent transition-colors tracking-tight">
                       <Link href={`/work/${proj.slug}`}>{proj.title}</Link>
-                    </h3>
+                    </h2>
                     <p className="text-xs sm:text-sm text-secondary mt-2 leading-relaxed">
                       {proj.shortDesc}
                     </p>

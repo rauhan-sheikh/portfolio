@@ -2,12 +2,14 @@ import React from "react";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { ArrowRight, Calendar, MapPin, Layers, Briefcase, Award } from "lucide-react";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Experience & Track Record — Rauhan Sheikh",
-  description: "Career timeline, growth of responsibility, and technical systems shipped by Rauhan Sheikh.",
-  alternates: { canonical: "/experience" },
-};
+  description:
+    "Career timeline, growth of responsibility, and technical systems shipped by Rauhan Sheikh.",
+  path: "/experience",
+});
 
 export const revalidate = 0;
 

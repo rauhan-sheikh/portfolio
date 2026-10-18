@@ -2,12 +2,14 @@ import React from "react";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { ArrowRight, Calendar, Clock, BookOpen, Tag } from "lucide-react";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Writing & Technical Essays — Rauhan Sheikh",
-  description: "Technical essays and engineering post-mortems on BullMQ queues, database indexing, financial ledgers, and API architecture.",
-  alternates: { canonical: "/writing" },
-};
+  description:
+    "Technical essays and engineering post-mortems on BullMQ queues, database indexing, financial ledgers, and API architecture.",
+  path: "/writing",
+});
 
 export const revalidate = 0;
 

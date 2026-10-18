@@ -16,6 +16,7 @@ import {
   Award,
 } from "lucide-react";
 import { Github } from "@/components/public/Icons";
+import { pageMetadata } from "@/lib/seo";
 import TeamsArchitectureStory from "@/components/public/TeamsArchitectureStory";
 import BulkEmailArchitectureStory from "@/components/public/BulkEmailArchitectureStory";
 
@@ -108,13 +109,13 @@ export default async function HomePage() {
                 >
                   Read Technical Essays
                 </Link>
-                <Link
+                <a
                   href={settings.resume_pdf_url || "/resume.pdf"}
                   target="_blank"
                   className="px-5 py-2.5 rounded-xl border border-border/70 hover:bg-surface text-secondary hover:text-primary transition"
                 >
                   Download Résumé
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -185,9 +186,9 @@ export default async function HomePage() {
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-accent">
                     {item.category}
                   </span>
-                  <h3 className="font-heading font-semibold text-sm text-primary mt-1">
+                  <h2 className="font-heading font-semibold text-sm text-primary mt-1">
                     {item.title}
-                  </h3>
+                  </h2>
                   <p className="text-xs leading-relaxed text-secondary mt-1">
                     {item.text}
                   </p>

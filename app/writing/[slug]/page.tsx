@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, ArrowRight, User } from "lucide-react";
 import Logo from "@/components/public/Logo";
 import Markdown from "@/components/public/Markdown";
+import { SITE_URL, pageMetadata, fitTitle, breadcrumbJsonLd } from "@/lib/seo";
 
 export const revalidate = 0;
 
@@ -22,30 +23,31 @@ export async function generateMetadata({
     return { title: "Article Not Found", robots: { index: false, follow: false } };
   }
 
-  const url = `/writing/${article.slug}`;
-  const title = article.seoTitle || `${article.title} — Rauhan Sheikh`;
-  const description = article.seoDesc || article.excerpt;
+  const title = article.seoTitle || fitTitle(`${article.title} — Rauhan Sheikh`, article.title);
   return {
-    title,
-    description,
-    alternates: { canonical: url },
-    authors: [{ name: article.author }],
-    openGraph: {
-      title: article.seoTitle || article.title,
-      description,
+    ...pageMetadata({
+      title: { absolute: title },
+      description: article.seoDesc || article.excerpt,
+      path: `/writing/${article.slug}`,
       type: "article",
-      url,
-      siteName: "Rauhan Sheikh",
-      publishedTime: article.publishedAt.toISOString(),
-      modifiedTime: article.updatedAt.toISOString(),
-      authors: [article.author],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: article.seoTitle || article.title,
-      description,
-    },
+      ogTitle: article.seoTitle || article.title,
+      extra: {
+        publishedTime: article.publishedAt.toISOString(),
+        modifiedTime: article.updatedAt.toISOString(),
+        authors: [article.author],
+        tags: safeTags(article.tags),
+      },
+    }),
+    authors: [{ name: article.author }],
   };
+}
+
+function safeTags(raw: string): string[] {
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
 }
 
 export default async function ArticleDetailPage({
@@ -81,19 +83,27 @@ export default async function ArticleDetailPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: article.title,
-            description: article.seoDesc || article.excerpt,
-            datePublished: article.publishedAt.toISOString(),
-            dateModified: article.updatedAt.toISOString(),
-            url: `https://rauhansheikh.com/writing/${article.slug}`,
-            mainEntityOfPage: `https://rauhansheikh.com/writing/${article.slug}`,
-            keywords: tags.join(", "),
-            author: { "@id": "https://rauhansheikh.com/#person" },
-            publisher: { "@id": "https://rauhansheikh.com/#person" },
-          }),
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: article.title,
+              description: article.seoDesc || article.excerpt,
+              image: `${SITE_URL}/writing/${article.slug}/opengraph-image`,
+              datePublished: article.publishedAt.toISOString(),
+              dateModified: article.updatedAt.toISOString(),
+              url: `${SITE_URL}/writing/${article.slug}`,
+              mainEntityOfPage: `${SITE_URL}/writing/${article.slug}`,
+              keywords: tags.join(", "),
+              author: { "@id": `${SITE_URL}/#person` },
+              publisher: { "@id": `${SITE_URL}/#person` },
+            },
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Writing", path: "/writing" },
+              { name: article.title, path: `/writing/${article.slug}` },
+            ]),
+          ]),
         }}
       />
       {/* Back button */}

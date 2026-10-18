@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { db } from "@/lib/db";
+import { SITE_URL } from "@/lib/seo";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://rauhansheikh.com";
+  const baseUrl = SITE_URL;
   const currentDate = new Date();
 
   // Core static pages

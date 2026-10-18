@@ -3,12 +3,14 @@ import { db } from "@/lib/db";
 import { Mail, MapPin, Shield, Clock } from "lucide-react";
 import { Github, Linkedin, Twitter } from "@/components/public/Icons";
 import ContactForm from "@/components/public/ContactForm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Contact — Rauhan Sheikh",
-  description: "Get in touch with Rauhan Sheikh for engineering opportunities, backend architecture, or consulting.",
-  alternates: { canonical: "/contact" },
-};
+  description:
+    "Get in touch with Rauhan Sheikh for engineering opportunities, backend architecture, or consulting.",
+  path: "/contact",
+});
 
 export const revalidate = 0;
 
