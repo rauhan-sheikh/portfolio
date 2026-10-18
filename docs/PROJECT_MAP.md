@@ -25,6 +25,8 @@ A guide to where everything on rauhansheikh.com comes from. Rules for changing i
 | `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest` | `app/sitemap.ts`, `robots.ts`, `manifest.ts` | DB (sitemap) | Sitemap revalidates hourly. |
 | `/opengraph-image`, `/twitter-image` (+ per page) | `opengraph-image.tsx` / `twitter-image.tsx` next to each page | `lib/og.tsx` | See below. |
 
+Error pages: `app/not-found.tsx` and `app/error.tsx` (branded, `noindex`).
+
 Shared chrome: `app/layout.tsx` (header, footer, command palette, site-wide JSON-LD for Person + WebSite),
 `components/public/Header.tsx` (navigation comes from the `NavigationItem` table), `Footer.tsx`.
 
@@ -69,12 +71,6 @@ resume (summary, location, phone switch, PDF with phone via `/api/admin/resume.p
 `DATABASE_URL`, `ADMIN_SESSION_SECRET`, `ADMIN_DEFAULT_PASSWORD`, `NEXT_PUBLIC_SITE_URL`,
 `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`, `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_REPLY_TO`, `CONTACT_NOTIFY_TO`,
 `NEWSLETTER_FROM`, `CONTACT_AUTO_ACK`.
-
-## Known legacy files
-
-`components/{Hero,Experience,Projects,Navbar,TechStack,HowIBuild,ResumeSection,Section,ProjectCard,AnimatedHero,ThemeToggle,FadeInSection}.tsx`,
-`lib/projects.ts`, `lib/resumePath.ts` and `content/projects/*.mdx` belong to the original scaffold and are not
-used by the live pages. They are scheduled for removal.
 
 ## Content update flow
 
