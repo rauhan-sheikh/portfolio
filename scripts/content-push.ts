@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import {
-  EXPERIENCE_FILE, EXPERIENCE_JSON, EXPERIENCE_SCALARS, NAVIGATION_FIELDS, NAVIGATION_FILE, NOW_FIELDS,
+  DB_ONLY_SETTINGS, EDUCATION_FIELDS, EDUCATION_FILE, SKILLS_FILE, EXPERIENCE_FILE, EXPERIENCE_JSON, EXPERIENCE_SCALARS, NAVIGATION_FIELDS, NAVIGATION_FILE, NOW_FIELDS,
   NOW_FILE, PERSONALITY_FIELDS, PERSONALITY_FILE, PROJECTS_DIR, PROJECT_JSON, PROJECT_SCALARS, ARTICLES_DIR,
   SETTINGS_FILE, listFiles, parseArticle, readJson, stringifyJsonColumn, type Json,
 } from "./content/shared";
@@ -51,6 +51,7 @@ async function main() {
   // ---- settings
   const settings = readJson<Record<string, string>>(SETTINGS_FILE, {});
   for (const [key, value] of Object.entries(settings)) {
+    if (DB_ONLY_SETTINGS.has(key)) continue;
     const existing = await prisma.siteSetting.findUnique({ where: { key } });
     await apply(
       `setting ${key}`,
@@ -66,7 +67,7 @@ async function main() {
     const p = readJson<Json>(file, {});
     const data: Json = {};
     for (const k of PROJECT_SCALARS) if (p[k] !== undefined) data[k] = p[k];
-    for (const k of PROJECT_JSON) data[k] = stringifyJsonColumn(p[k]);
+    for (const k of PROJECT_JSON) if (p[k] !== undefined) data[k] = stringifyJsonColumn(p[k]);
     const existing = await prisma.project.findUnique({ where: { slug: String(p.slug) } });
     await apply(
       `project ${p.slug}`,
@@ -81,7 +82,7 @@ async function main() {
   for (const e of readJson<Json[]>(EXPERIENCE_FILE, [])) {
     const data: Json = {};
     for (const k of EXPERIENCE_SCALARS) if (e[k] !== undefined) data[k] = e[k];
-    for (const k of EXPERIENCE_JSON) data[k] = stringifyJsonColumn(e[k]);
+    for (const k of EXPERIENCE_JSON) if (e[k] !== undefined) data[k] = stringifyJsonColumn(e[k]);
     const existing = await prisma.experience.findFirst({ where: { company: String(e.company), role: String(e.role) } });
     await apply(
       `experience ${e.role} @ ${e.company}`,
@@ -89,6 +90,33 @@ async function main() {
       data,
       () => prisma.experience.create({ data: data as never }),
       () => prisma.experience.update({ where: { id: existing!.id }, data: data as never })
+    );
+  }
+
+  // ---- education (natural key: institution + degree)
+  for (const ed of readJson<Json[]>(EDUCATION_FILE, [])) {
+    const data: Json = {};
+    for (const k of EDUCATION_FIELDS) if (ed[k] !== undefined) data[k] = ed[k];
+    const existing = await prisma.education.findFirst({ where: { institution: String(ed.institution), degree: String(ed.degree) } });
+    await apply(
+      `education ${ed.degree}`,
+      existing as unknown as Json | null,
+      data,
+      () => prisma.education.create({ data: data as never }),
+      () => prisma.education.update({ where: { id: existing!.id }, data: data as never })
+    );
+  }
+
+  // ---- skill groups (natural key: label)
+  for (const g of readJson<Json[]>(SKILLS_FILE, [])) {
+    const data: Json = { label: g.label, items: stringifyJsonColumn(g.items), order: Number(g.order) || 0 };
+    const existing = await prisma.skillGroup.findUnique({ where: { label: String(g.label) } });
+    await apply(
+      `skills ${g.label}`,
+      existing as unknown as Json | null,
+      data,
+      () => prisma.skillGroup.create({ data: data as never }),
+      () => prisma.skillGroup.update({ where: { label: String(g.label) }, data: data as never })
     );
   }
 

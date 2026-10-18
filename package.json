@@ -15,6 +15,7 @@
     "content:pull": "tsx scripts/content-pull.ts",
     "content:push": "tsx scripts/content-push.ts",
     "preview": "node scripts/preview.mjs",
+    "resume:check": "tsx scripts/check-resume.ts",
     "admin:password": "tsx scripts/change-password.ts"
   },
   "prisma": {
@@ -24,6 +25,7 @@
     "@mdx-js/loader": "^3.1.1",
     "@next/mdx": "^16.1.6",
     "@prisma/client": "^6.19.3",
+    "@react-pdf/renderer": "^4.9.0",
     "bcryptjs": "^3.0.3",
     "framer-motion": "^12.34.4",
     "gray-matter": "^4.0.3",

@@ -110,7 +110,7 @@ export default async function HomePage() {
                   Read Technical Essays
                 </Link>
                 <a
-                  href={settings.resume_pdf_url || "/resume.pdf"}
+                  href="/resume.pdf"
                   target="_blank"
                   className="px-5 py-2.5 rounded-xl border border-border/70 hover:bg-surface text-secondary hover:text-primary transition"
                 >

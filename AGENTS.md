@@ -20,6 +20,7 @@ Resend email. Package manager is **pnpm**.
 | Build (Vercel runs this) | `pnpm build` = `prisma migrate deploy && prisma generate && next build` |
 | Seed a fresh DB | `ADMIN_DEFAULT_PASSWORD=... pnpm db:seed` (admin user + `content/site/*`) |
 | Preview with no database | `pnpm preview` (in-memory Postgres, seeded from `content/site`, `next dev` on :3111) |
+| Check the generated résumé is one page | `pnpm resume:check` (with `pnpm preview` running) |
 | Capture live content into files | `pnpm content:pull` (needs the live `DATABASE_URL`) |
 | Apply files to a DB | `pnpm content:push` (dry run) / `pnpm content:push --yes` |
 

@@ -1,0 +1,59 @@
+[
+  {
+    "label": "Languages",
+    "items": [
+      "JavaScript",
+      "TypeScript",
+      "Python",
+      "HTML",
+      "CSS"
+    ],
+    "order": 1
+  },
+  {
+    "label": "Frontend",
+    "items": [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Chrome Extensions"
+    ],
+    "order": 2
+  },
+  {
+    "label": "Backend",
+    "items": [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "BullMQ",
+      "Webhooks",
+      "Electron"
+    ],
+    "order": 3
+  },
+  {
+    "label": "Databases & ORM",
+    "items": [
+      "PostgreSQL",
+      "MongoDB",
+      "MySQL",
+      "Prisma",
+      "Redis"
+    ],
+    "order": 4
+  },
+  {
+    "label": "Tools & Infrastructure",
+    "items": [
+      "Git",
+      "GitHub Actions",
+      "Docker",
+      "Linux",
+      "PM2",
+      "Postman",
+      "TurboRepo"
+    ],
+    "order": 5
+  }
+]

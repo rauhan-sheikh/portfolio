@@ -13,6 +13,8 @@ export const CONTENT_DIR = path.join(process.cwd(), "content", "site");
 export const SETTINGS_FILE = path.join(CONTENT_DIR, "settings.json");
 export const EXPERIENCE_FILE = path.join(CONTENT_DIR, "experience.json");
 export const NOW_FILE = path.join(CONTENT_DIR, "now.json");
+export const EDUCATION_FILE = path.join(CONTENT_DIR, "education.json");
+export const SKILLS_FILE = path.join(CONTENT_DIR, "skills.json");
 export const PERSONALITY_FILE = path.join(CONTENT_DIR, "personality.json");
 export const NAVIGATION_FILE = path.join(CONTENT_DIR, "navigation.json");
 export const META_FILE = path.join(CONTENT_DIR, "meta.json");
@@ -26,14 +28,19 @@ export const PROJECT_SCALARS = [
   "title", "slug", "category", "year", "shortDesc", "longDesc", "status", "isFeatured", "order",
   "coverImage", "thumbnail", "accentColor", "projectMark", "liveUrl", "githubUrl", "demoUrl",
   "caseStudySlug", "theProblem", "theMessyPart", "architecture", "technicalDecisions",
-  "whatIdChange", "fullContent", "showOnHome", "showInWork",
+  "whatIdChange", "fullContent", "showOnHome", "showInWork", "resumeBlurb", "showOnResume",
 ] as const;
 export const PROJECT_JSON = ["stack", "metrics", "links"] as const;
 
 export const EXPERIENCE_SCALARS = [
-  "company", "role", "location", "startDate", "endDate", "isCurrent", "description", "order",
+  "company", "role", "location", "startDate", "endDate", "isCurrent", "description", "order", "showOnResume",
 ] as const;
-export const EXPERIENCE_JSON = ["bullets", "technologies", "metrics", "linkedProjects"] as const;
+export const EXPERIENCE_JSON = ["bullets", "technologies", "metrics", "linkedProjects", "resumeBullets"] as const;
+
+export const EDUCATION_FIELDS = ["institution", "degree", "period", "detail", "order"] as const;
+
+/** Settings that live only in the database (never written to files / git). */
+export const DB_ONLY_SETTINGS = new Set(["resume_phone"]);
 
 export const NOW_FIELDS = ["category", "title", "text", "order", "isActive"] as const;
 export const PERSONALITY_FIELDS = ["category", "title", "body", "order"] as const;

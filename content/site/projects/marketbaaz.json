@@ -64,5 +64,7 @@
       "label": "MarketBaaz",
       "url": "https://marketbaaz.com"
     }
-  ]
+  ],
+  "showOnResume": true,
+  "resumeBlurb": "Public Amazon seller-intelligence platform (web app and Chrome extension) that turns marketplace data into clear insight and never shows a number the evidence can't support."
 }

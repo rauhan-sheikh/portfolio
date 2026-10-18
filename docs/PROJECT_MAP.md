@@ -15,7 +15,8 @@ A guide to where everything on rauhansheikh.com comes from. Rules for changing i
 | `/now` | `app/now/page.tsx` | DB: active now items | Categories: Building, Learning, Reading, Thinking, Experimenting. |
 | `/experience` | `app/experience/page.tsx` | DB: experiences + project titles for links | |
 | `/about` | `app/about/page.tsx` | DB: personality items; story text is hard-coded | |
-| `/resume` | `app/resume/page.tsx` | DB: experiences, featured published projects, `resume_summary` setting | Competencies are hard-coded. The download is the static `public/resume.pdf`. |
+| `/resume` | `app/resume/page.tsx` | `getResumeData()` in `lib/resume.ts` | Same data as the PDF. Skills and education come from `SkillGroup` / `Education`; per-role short bullets from `Experience.resumeBullets`. |
+| `/resume.pdf` | `app/resume.pdf/route.ts` + `components/resume/ResumeDocument.tsx` | `getResumeData()` | One-page US Letter PDF generated with `@react-pdf/renderer`. No phone number unless the `resume_show_phone` setting is on. |
 | `/contact` | `app/contact/page.tsx` + `ContactForm` | DB: settings; posts to `/api/contact` | Messages are stored and emailed via Resend. |
 | `/newsletter/*` | `app/newsletter/*` | Subscribers | `noindex`. Confirm and unsubscribe flows. |
 | `/github`, `/linkedin`, `/x`… | `app/[slug]/page.tsx` | Hard-coded map | Short links that redirect to social profiles. |
@@ -30,11 +31,11 @@ Shared chrome: `app/layout.tsx` (header, footer, command palette, site-wide JSON
 
 `app/admin/*` pages call `app/api/admin/*` routes (all require an admin session): projects, articles
 (+ newsletter send), experience, now, personality, navigation, settings, subscribers, messages, audit log,
-resume, homepage, about. Admin saves write straight to the database.
+resume (summary, location, phone switch, PDF with phone via `/api/admin/resume.pdf`), homepage, about. Admin saves write straight to the database.
 
 ## Data model (`prisma/schema.prisma`)
 
-`Project`, `Experience`, `Article`, `NowItem`, `PersonalityItem`, `SiteSetting` (key/value), `NavigationItem`,
+`Project`, `Experience`, `Education`, `SkillGroup`, `Article`, `NowItem`, `PersonalityItem`, `SiteSetting` (key/value), `NavigationItem`,
 `ContactMessage`, `Subscriber`, `NewsletterSend`, `AdminUser`, `AuditLog`. List-like fields (`stack`, `metrics`,
 `links`, `bullets`, `technologies`, `tags`) are JSON strings.
 
@@ -58,6 +59,7 @@ resume, homepage, about. Admin saves write straight to the database.
 | `pnpm content:push [--yes]` (`scripts/content-push.ts`) | `content/site/*` to a DB. Dry run by default; upsert only. |
 | `pnpm preview` (`scripts/preview.mjs`) | In-memory Postgres (PGlite) + migrate + seed + `next dev` on :3111. `--db-only`, `--no-seed` available. |
 | `prisma/seed.ts` | Admin user, then `content:push --yes`. |
+| `pnpm resume:check [url]` (`scripts/check-resume.ts`) | Fetches the generated PDF and fails unless it is exactly one page. Needs `pnpm preview` running (or pass the production URL). |
 | `scripts/repair-visibility.ts` | Re-list projects hidden by the old admin bug; dry run unless `--yes`. |
 | `scripts/change-password.ts` | Change the admin password. |
 

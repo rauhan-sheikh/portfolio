@@ -40,14 +40,14 @@
       "description": "Daily active learners across programs"
     },
     {
-      "label": "Query Speed",
-      "value": "9× Faster",
+      "label": "Peak Query Time",
+      "value": "2.5 s → <300 ms",
       "description": "Targeted composite indexing on heavy cohort queries"
     },
     {
-      "label": "RAM Savings",
-      "value": "72%",
-      "description": "Streamed CSV report generation pipelines"
+      "label": "Growth",
+      "value": "Promoted within a year",
+      "description": "After taking ownership of critical modules"
     }
   ],
   "links": [

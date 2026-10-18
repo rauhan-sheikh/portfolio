@@ -94,6 +94,10 @@ model Project {
   // Visibility toggles
   showOnHome       Boolean         @default(true)
   showInWork       Boolean         @default(true)
+
+  // One-page resume
+  resumeBlurb      String?         @db.Text
+  showOnResume     Boolean         @default(false)
   
   createdAt        DateTime        @default(now())
   updatedAt        DateTime        @updatedAt
@@ -112,9 +116,31 @@ model Experience {
   technologies   String    @default("[]") // JSON string array of tech tags
   metrics        String    @default("[]") // JSON string array of outcomes
   linkedProjects String    @default("[]") // JSON string array of project slugs or titles
+  resumeBullets  String    @default("[]") // Short JSON string array for the one-page resume; falls back to bullets
+  showOnResume   Boolean   @default(true)
   order          Int       @default(0)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  institution String
+  degree      String
+  period      String?
+  detail      String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SkillGroup {
+  id        String   @id @default(cuid())
+  label     String   @unique
+  items     String   @default("[]") // JSON string array
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Article {

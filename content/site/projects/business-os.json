@@ -59,5 +59,7 @@
       "label": "Live Demo",
       "url": "https://businessos.rauhansheikh.com"
     }
-  ]
+  ],
+  "showOnResume": true,
+  "resumeBlurb": "Personal project: a multi-tenant financial system built on a precision-safe double-entry ledger (integer minor units, immutable journals, audit-safe history)."
 }

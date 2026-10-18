@@ -11,6 +11,8 @@ const withMDXConfig = withMDX({
 
 const nextConfig: NextConfig = withMDXConfig({
   pageExtensions: ["ts", "tsx", "js", "jsx", "mdx"],
+  // react-pdf ships its own font/layout engine; keep it out of the server bundle.
+  serverExternalPackages: ["@react-pdf/renderer"],
   // ...other Next.js config options
 });
 
