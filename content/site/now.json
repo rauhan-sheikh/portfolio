@@ -1,0 +1,37 @@
+[
+  {
+    "category": "BUILDING",
+    "title": "MarketBaaz, Workforce & CRM at ProSync",
+    "text": "Building MarketBaaz, an internal HR platform and a CRM at ProSync, and running the servers underneath them.",
+    "order": 1,
+    "isActive": true
+  },
+  {
+    "category": "LEARNING",
+    "title": "PostgreSQL Internals",
+    "text": "Diving deeper into Postgres storage engines: VACUUM behavior, write-ahead logging (WAL), and composite index selectivity.",
+    "order": 2,
+    "isActive": true
+  },
+  {
+    "category": "READING",
+    "title": "Engineering Literature",
+    "text": "Reading 'Designing Data-Intensive Applications' by Martin Kleppmann & 'A Philosophy of Software Design' by John Ousterhout.",
+    "order": 3,
+    "isActive": true
+  },
+  {
+    "category": "THINKING",
+    "title": "Accidental Complexity in Web Apps",
+    "text": "Reflecting on how much complexity in modern web apps comes from trying to coordinate distributed state in JavaScript instead of relying on solid database primitives.",
+    "order": 4,
+    "isActive": true
+  },
+  {
+    "category": "EXPERIMENTING",
+    "title": "Local-First Architecture",
+    "text": "Experimenting with CRDTs and offline-capable data synchronization patterns for real-time collaboration tools.",
+    "order": 5,
+    "isActive": true
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "label": "Work",
+    "href": "/work",
+    "order": 1,
+    "isEnabled": true,
+    "isExternal": false
+  },
+  {
+    "label": "Experience",
+    "href": "/experience",
+    "order": 2,
+    "isEnabled": true,
+    "isExternal": false
+  },
+  {
+    "label": "Writing",
+    "href": "/writing",
+    "order": 3,
+    "isEnabled": true,
+    "isExternal": false
+  },
+  {
+    "label": "Now",
+    "href": "/now",
+    "order": 4,
+    "isEnabled": true,
+    "isExternal": false
+  },
+  {
+    "label": "About",
+    "href": "/about",
+    "order": 5,
+    "isEnabled": true,
+    "isExternal": false
+  },
+  {
+    "label": "Resume",
+    "href": "/resume",
+    "order": 6,
+    "isEnabled": true,
+    "isExternal": false
+  },
+  {
+    "label": "Contact",
+    "href": "/contact",
+    "order": 7,
+    "isEnabled": true,
+    "isExternal": false
+  }
+]

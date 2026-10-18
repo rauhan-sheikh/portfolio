@@ -1,0 +1,32 @@
+[
+  {
+    "category": "LIKES_BUILDING",
+    "title": "Correctness-Critical Backend Systems",
+    "body": "Ledgers where every cent must balance, background queue workers that never drop messages, idempotent API contracts, and zero-downtime database migrations.",
+    "order": 1
+  },
+  {
+    "category": "OBSESSIONS",
+    "title": "Database Schemas That Make Bad State Impossible",
+    "body": "I have an unreasonable amount of respect for a well-designed relational schema with proper foreign keys, check constraints, and indexed access paths.",
+    "order": 2
+  },
+  {
+    "category": "ANNOYANCES",
+    "title": "Browser-Dependent Operations",
+    "body": "If the employee has to keep a browser tab open for 20 minutes for a background job to finish, something has gone architecturally wrong.",
+    "order": 3
+  },
+  {
+    "category": "OPINIONS",
+    "title": "Boring Technology With Taste",
+    "body": "Most software does not need 15 microservices. It needs a well-structured monolith, strict module boundaries, an indexed PostgreSQL database, and good typography.",
+    "order": 4
+  },
+  {
+    "category": "IMPROVING",
+    "title": "System Design Before Code",
+    "body": "Currently training myself to spend more time sketching architecture, failure modes, and state transitions on paper before typing the first line of code.",
+    "order": 5
+  }
+]

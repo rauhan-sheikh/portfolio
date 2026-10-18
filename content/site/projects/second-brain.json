@@ -1,0 +1,61 @@
+{
+  "title": "Second Brain",
+  "slug": "second-brain",
+  "category": "PERSONAL",
+  "year": "2023–2024",
+  "shortDesc": "Personal knowledge management app for saving, organizing, and sharing technical links, notes, and research papers.",
+  "longDesc": "A high-speed bookmarking and knowledge curation platform designed for developers. Features tag hierarchies, full-text search, reading list priorities, and instant link preview extraction.",
+  "status": "PUBLISHED",
+  "isFeatured": false,
+  "order": 10,
+  "coverImage": "/projects/second-brain.png",
+  "thumbnail": null,
+  "accentColor": "#10b981",
+  "projectMark": "BRAIN",
+  "liveUrl": "https://secondbrain.rauhansheikh.com",
+  "githubUrl": "https://github.com/rauhan-sheikh/Second-Brain-Frontend",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "Modern developers read hundreds of articles, repositories, and docs a month. Browser bookmarks are a graveyard where links go to be forgotten without metadata, context, or searchable tag associations.",
+  "theMessyPart": "Scraping Open Graph tags and page titles from arbitrary URLs that employ aggressive bot detection or client-side SPA rendering.",
+  "architecture": "React frontend communicating with an Express / Node.js API with MongoDB document storage. Metadata scraper extracts OG tags in the background on link insertion.",
+  "technicalDecisions": "1. Fast indexing of tags and text fields for instant search-as-you-type.\n2. Clean responsive UI with quick keyboard navigation.\n3. Public shareable collections for curated topics.",
+  "whatIdChange": "Migrate MongoDB to PostgreSQL with pgvector for semantic search and vector embeddings.",
+  "fullContent": "## A Digital Knowledge Repository\n\nSecond Brain was built to solve personal bookmark rot. It allows developers to quickly capture URLs, auto-extract previews, associate hierarchical tags, and search notes with sub-100ms latency.",
+  "showOnHome": true,
+  "showInWork": true,
+  "stack": [
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Tailwind CSS",
+    "TypeScript"
+  ],
+  "metrics": [
+    {
+      "label": "Search Latency",
+      "value": "< 80ms",
+      "description": "Fast indexing and retrieval"
+    },
+    {
+      "label": "Categorization",
+      "value": "Tags & Collections",
+      "description": "Hierarchical topic categorization"
+    }
+  ],
+  "links": [
+    {
+      "label": "Frontend Repo",
+      "url": "https://github.com/rauhan-sheikh/Second-Brain-Frontend"
+    },
+    {
+      "label": "Backend Repo",
+      "url": "https://github.com/rauhan-sheikh/Second-Brain-Backend"
+    },
+    {
+      "label": "Live Demo",
+      "url": "https://secondbrain.rauhansheikh.com"
+    }
+  ]
+}

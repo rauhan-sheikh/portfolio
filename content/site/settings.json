@@ -1,0 +1,23 @@
+{
+  "accent_color": "#3b82f6",
+  "availability_active": "true",
+  "availability_badge": "Open to opportunities",
+  "email": "hello@rauhansheikh.com",
+  "github_url": "https://github.com/rauhan-sheikh",
+  "linkedin_url": "https://linkedin.com/in/rauhan-sheikh",
+  "location": "India",
+  "resume_pdf_url": "/resume.pdf",
+  "section_contact_enabled": "true",
+  "section_experience_enabled": "true",
+  "section_featured_work_enabled": "true",
+  "section_hero_enabled": "true",
+  "section_now_enabled": "true",
+  "section_personality_enabled": "true",
+  "section_signature_stories_enabled": "true",
+  "section_writing_enabled": "true",
+  "site_bio": "I build things, break things, figure things out, and ship them. Focused on backend reliability, database architecture, and resilient web software.",
+  "site_name": "Rauhan Sheikh",
+  "site_tagline": "I like building the parts of software that have to actually work.",
+  "site_title": "Rauhan Sheikh — Software Developer & Builder",
+  "twitter_url": "https://x.com/rauhan_sheikh"
+}

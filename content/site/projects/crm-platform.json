@@ -1,0 +1,54 @@
+{
+  "title": "CRM Platform",
+  "slug": "crm-platform",
+  "category": "INTERNAL",
+  "year": "2026",
+  "shortDesc": "An internal CRM that keeps sales and support organised: quotes and invoices, who can see what, and automatic links to the company's other products. Internal tool, so described at a high level.",
+  "longDesc": "Work on the company CRM covering quotation and invoicing workflows with PDF output, Gmail integration, granular access control, and the API and webhook integration that links it to MarketBaaz. Built by the same two-person team as the Workforce platform. Internal to the company, so this page stays general.",
+  "status": "PUBLISHED",
+  "isFeatured": true,
+  "order": 3,
+  "coverImage": null,
+  "thumbnail": null,
+  "accentColor": "#10b981",
+  "projectMark": "CRM",
+  "liveUrl": "",
+  "githubUrl": "",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "Sales and support needed quotes and invoices that could be configured instead of hand-built, access that matched how the company is organised, and a dependable feed of events from the company's products so the CRM reflects reality without manual entry.",
+  "theMessyPart": "A CRM holds live customer data, so every change has to be safe by default: previews before scripts touch production, immediate loss of access for deactivated users, and integrations that stay correct when events arrive twice or out of order.",
+  "architecture": "A Node.js and TypeScript application with the same self-hosted foundation as the other platforms. Quotations convert to invoices with validation and PDF output; access is granted at individual, team and department level with audit trails; and signed webhooks plus a small API connect it to MarketBaaz in both directions.",
+  "technicalDecisions": "1. Signed, deduplicated webhooks with database-level idempotency, so repeated events can't create duplicates.\n2. Key members on a stable external ID rather than email alone.\n3. Dry-run previews and explicit confirmation for any script that changes live data.\n4. Immediate access removal on deactivation and lockout after repeated failed sign-ins.\n5. A one-command isolated local environment on sample data.",
+  "whatIdChange": "I would write the integration contract and its tests before building either side. Several fixes came from discovering mismatches between the two systems after the fact.",
+  "fullContent": "## What I built\n\n- **Quotations and invoices:** configurable line items, taxes, discounts and currencies, reusable templates, PDF download and quote-to-invoice conversion with validation.\n- **Access control:** permissions across individuals, teams, sub-departments and departments, with audit trails.\n- **Integrations:** Gmail integration, and a signed API and webhook layer that connects the CRM to MarketBaaz, so a contact can be issued MarketBaaz access automatically and product events flow back.\n- **Safety and developer experience:** previews and confirmations for data-changing scripts, and an isolated one-command local setup.\n\n## Note\n\nThis is an internal company system built by a two-person team, with me as the senior developer. There is no public link and the description is deliberately general.",
+  "showOnHome": true,
+  "showInWork": true,
+  "stack": [
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "MongoDB",
+    "Gmail API",
+    "PDF generation",
+    "Webhooks"
+  ],
+  "metrics": [
+    {
+      "label": "Integrations",
+      "value": "APIs + webhooks",
+      "description": "Signed, deduplicated events between products"
+    },
+    {
+      "label": "Access Control",
+      "value": "Person to department",
+      "description": "Permissions at individual, team and department level, all audited"
+    },
+    {
+      "label": "Quote → Invoice",
+      "value": "1-click",
+      "description": "With validation and PDF output"
+    }
+  ],
+  "links": []
+}

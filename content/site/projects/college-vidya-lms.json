@@ -1,0 +1,59 @@
+{
+  "title": "College Vidya EdTech Platforms",
+  "slug": "college-vidya-lms",
+  "category": "PROFESSIONAL",
+  "year": "2024–2026",
+  "shortDesc": "Large-scale EdTech LMS & ERP modules serving 20K+ active students across academic delivery, student portals, and enrollment workflows.",
+  "longDesc": "Architected, expanded, and optimized core student-facing and administrative portals. Designed secure role-based access control, streamlined cohort reporting, and reduced peak query load by 9×.",
+  "status": "PUBLISHED",
+  "isFeatured": true,
+  "order": 6,
+  "coverImage": "/projects/college-vidya.png",
+  "thumbnail": null,
+  "accentColor": "#0ea5e9",
+  "projectMark": "EDTECH",
+  "liveUrl": "https://collegevidya.com",
+  "githubUrl": "",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "Rapid growth in student enrollment caused significant database contention during semester start periods. Heavy analytical reporting queries timed out while student login and lecture viewing were sluggish.",
+  "theMessyPart": "Refactoring legacy unindexed relational queries across tables with millions of academic event records without taking down the production system.",
+  "architecture": "PostgreSQL with optimized composite indexes, Node.js / Express API services, React & Next.js frontend interfaces, Redis query cache for high-frequency course catalogs.",
+  "technicalDecisions": "1. Created targeted composite indexes on (student_id, course_id, status) reducing table scans.\n2. Streamed large CSV exports using Node.js streams to lower RAM usage by 72%.\n3. Implemented Redis caching for high-read, low-write academic metadata.",
+  "whatIdChange": "Introduce read-replicas for internal operational dashboards earlier to isolate analytical query load from student transactional traffic.",
+  "fullContent": "## Engineering at EdTech Scale\n\nServing 20,000+ daily active learners requires zero tolerance for sluggish endpoints or downtime during peak live lecture hours.\n\n### Key Deliverables\n- **Role-Based Access Control (RBAC)**: Secure authorization across students, faculties, academic advisors, and administrative superusers.\n- **Reporting Optimization**: Re-engineered unindexed reporting joins that were locking tables; reduced peak query duration from 2.5 seconds to ~280ms.\n- **Streaming Exports**: Converted in-memory array aggregation of 100K+ rows to streaming Node.js pipelines, cutting server RAM consumption by 72%.",
+  "showOnHome": true,
+  "showInWork": true,
+  "stack": [
+    "React",
+    "Next.js",
+    "Node.js",
+    "PostgreSQL",
+    "Prisma",
+    "Redis",
+    "TypeScript"
+  ],
+  "metrics": [
+    {
+      "label": "Active Students",
+      "value": "20K+",
+      "description": "Daily active learners across programs"
+    },
+    {
+      "label": "Query Speed",
+      "value": "9× Faster",
+      "description": "Targeted composite indexing on heavy cohort queries"
+    },
+    {
+      "label": "RAM Savings",
+      "value": "72%",
+      "description": "Streamed CSV report generation pipelines"
+    }
+  ],
+  "links": [
+    {
+      "label": "Company Portal",
+      "url": "https://collegevidya.com"
+    }
+  ]
+}

@@ -18,12 +18,14 @@ Resend email. Package manager is **pnpm**.
 | Typecheck | `npx tsc --noEmit` |
 | Lint | `pnpm lint` (the repo has pre-existing lint errors; only fix what you touch) |
 | Build (Vercel runs this) | `pnpm build` = `prisma migrate deploy && prisma generate && next build` |
-| Seed a fresh DB | `ADMIN_DEFAULT_PASSWORD=... pnpm db:seed` |
-| Sync ProSync content into a live DB | `pnpm db:sync-prosync` (see "Content" below) |
+| Seed a fresh DB | `ADMIN_DEFAULT_PASSWORD=... pnpm db:seed` (admin user + `content/site/*`) |
+| Preview with no database | `pnpm preview` (in-memory Postgres, seeded from `content/site`, `next dev` on :3111) |
+| Capture live content into files | `pnpm content:pull` (needs the live `DATABASE_URL`) |
+| Apply files to a DB | `pnpm content:push` (dry run) / `pnpm content:push --yes` |
 
 **Windows quirks.** If `node_modules` links point at a missing folder, repair with
 `CI=true pnpm install --frozen-lockfile --config.confirmModulesPurge=false`. There is no local Postgres and the
-Docker daemon is usually off; see the preview database note in `docs/PROJECT_MAP.md`.
+Docker daemon is usually off, so use `pnpm preview` for anything that needs a database.
 
 ## Git workflow (mandatory)
 
@@ -70,15 +72,23 @@ every time you write or edit copy, case studies, résumé text, essays or Now it
 
 ## Content: where it lives
 
-Public content is **stored in the database** and edited in `/admin`. Versioned baselines live in code and are
-applied by scripts, so a fresh database can be rebuilt:
+The live site reads the **database**, which the owner can also edit in `/admin`. The **versioned copy of all
+public content is `content/site/`** and the two are kept in step with scripts:
 
-- `prisma/seed.ts` — full seed for a new database.
-- `prisma/content/prosync.ts` — the ProSync role, the four ProSync projects, project display order and the
-  matching Now item. `scripts/sync-prosync.ts` upserts it into a live DB.
+```
+content/site/
+  settings.json  experience.json  now.json  personality.json  navigation.json  meta.json
+  projects/<slug>.json      (stack/metrics/links are real arrays)
+  articles/<slug>.md        (front matter + Markdown body)
+```
 
-Warning: syncing overwrites admin edits to those rows. Capture admin edits first (read the live page or the
-admin form) before re-running a sync.
+- `pnpm content:pull` writes the live DB into those files. **Always run it first** so edits made in `/admin` are
+  captured in git before you change anything; review with `git diff content/site`.
+- Edit the files (or ask the agent to), preview with `pnpm preview`, open a PR.
+- `pnpm content:push` is a dry run that lists what would change; `--yes` writes. It upserts by natural key, never
+  deletes rows, and never touches `newsletterSentAt`. **Only the owner runs it against production, after the PR is
+  merged.**
+- `prisma/seed.ts` creates the admin user and then runs `content:push --yes`, so a fresh database equals the repo.
 
 ## Before you open a PR
 

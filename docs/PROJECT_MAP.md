@@ -15,7 +15,7 @@ A guide to where everything on rauhansheikh.com comes from. Rules for changing i
 | `/now` | `app/now/page.tsx` | DB: active now items | Categories: Building, Learning, Reading, Thinking, Experimenting. |
 | `/experience` | `app/experience/page.tsx` | DB: experiences + project titles for links | |
 | `/about` | `app/about/page.tsx` | DB: personality items; story text is hard-coded | |
-| `/resume` | `app/resume/page.tsx` | DB: experiences, featured projects, `resume_summary` setting | Competencies are hard-coded. The download is the static `public/resume.pdf`. |
+| `/resume` | `app/resume/page.tsx` | DB: experiences, featured published projects, `resume_summary` setting | Competencies are hard-coded. The download is the static `public/resume.pdf`. |
 | `/contact` | `app/contact/page.tsx` + `ContactForm` | DB: settings; posts to `/api/contact` | Messages are stored and emailed via Resend. |
 | `/newsletter/*` | `app/newsletter/*` | Subscribers | `noindex`. Confirm and unsubscribe flows. |
 | `/github`, `/linkedin`, `/x`… | `app/[slug]/page.tsx` | Hard-coded map | Short links that redirect to social profiles. |
@@ -47,14 +47,17 @@ resume, homepage, about. Admin saves write straight to the database.
   `app/work/[slug]/opengraph-image.tsx` and `app/writing/[slug]/opengraph-image.tsx`.
 - Structured data: Person + WebSite in `app/layout.tsx`; `CreativeWork` and `BlogPosting` plus breadcrumbs on detail pages.
 
-## Scripts
+## Content files and scripts
+
+`content/site/` is the versioned copy of all public content (see AGENTS.md). Shapes are defined once in
+`scripts/content/shared.ts` and used by both directions.
 
 | Script | Purpose |
 |---|---|
-| `prisma/seed.ts` | Build a fresh database (`pnpm db:seed`). |
-| `prisma/content/prosync.ts` | ProSync experience, projects, order and Now item (shared by seed and sync). |
-| `scripts/sync-prosync.ts` | Upsert the ProSync content into a live DB (`pnpm db:sync-prosync`). |
-| `scripts/sync-data.ts` | Older one-off sync (Akshta project, availability badge). |
+| `pnpm content:pull` (`scripts/content-pull.ts`) | Live DB to `content/site/*`. Run before editing so admin changes are captured. |
+| `pnpm content:push [--yes]` (`scripts/content-push.ts`) | `content/site/*` to a DB. Dry run by default; upsert only. |
+| `pnpm preview` (`scripts/preview.mjs`) | In-memory Postgres (PGlite) + migrate + seed + `next dev` on :3111. `--db-only`, `--no-seed` available. |
+| `prisma/seed.ts` | Admin user, then `content:push --yes`. |
 | `scripts/repair-visibility.ts` | Re-list projects hidden by the old admin bug; dry run unless `--yes`. |
 | `scripts/change-password.ts` | Change the admin password. |
 
@@ -70,8 +73,8 @@ resume, homepage, about. Admin saves write straight to the database.
 `lib/projects.ts`, `lib/resumePath.ts` and `content/projects/*.mdx` belong to the original scaffold and are not
 used by the live pages. They are scheduled for removal.
 
-## Content update flow (today)
+## Content update flow
 
-1. Edit copy in `/admin` (single items) or in `prisma/content/prosync.ts` (the ProSync block).
-2. For a code change, branch per [AGENTS.md](../AGENTS.md), open a PR, merge.
-3. Apply content to the live DB only when the owner says so (`pnpm db:sync-prosync`).
+1. `pnpm content:pull` (live DB to files) and commit nothing yet; look at `git diff content/site`.
+2. Branch per [AGENTS.md](../AGENTS.md), edit `content/site/*`, `pnpm preview`, open a PR, merge.
+3. The owner runs `pnpm content:push --yes` against production.

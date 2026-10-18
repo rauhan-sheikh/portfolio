@@ -1,0 +1,146 @@
+[
+  {
+    "company": "ProSync Infotech Private Limited",
+    "role": "Software Developer",
+    "location": "India",
+    "startDate": "Aug 2026",
+    "endDate": "Present",
+    "isCurrent": true,
+    "description": "Building and running three connected products at an e-commerce education company: MarketBaaz (a public tool that helps Amazon sellers decide what to sell), an internal HR platform, and an internal CRM, plus the servers they all run on.",
+    "order": 1,
+    "bullets": [
+      "Sole engineer on MarketBaaz: took the web app from a waitlist to a public launch and built the Chrome extension end to end, then shipped a new extension version roughly every two days for five weeks.",
+      "Replaced a fixed estimation formula with a trained machine-learning pipeline that refuses to show a number when the evidence isn't there, and paired it with a configurable, confidence-scored ranking model.",
+      "Grew MarketBaaz into a data engine for products, keywords, brands and sellers, gathered by the extension itself, and kept it fast as the data grew by fixing database failures, adding indexes and trimming page weight (the main logo alone went from 243 KB to about 6 KB).",
+      "Migrated MarketBaaz to new infrastructure and a new domain with minimal disruption: staged user communication, rollback-ready extension releases and the old domain kept alive for backward compatibility.",
+      "As senior developer on a two-person team, built the internal HR platform (Next.js, MongoDB) and its Windows and macOS desktop app (Electron): approvals, leave, payroll, incentives, shifts and reporting, all driven by admin-set policy rather than hard-coded rules.",
+      "On the same two-person team, built the CRM's quotation and invoicing workflows with PDF output and Gmail integration, plus access control with audit trails.",
+      "Connected all three products through our own APIs and webhooks, so a CRM contact can be issued MarketBaaz access automatically and product events flow back into the CRM.",
+      "Own the self-hosted VPS infrastructure: deployments through GitHub Actions with rollback, process supervision, backups and monitoring."
+    ],
+    "technologies": [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Redis",
+      "BullMQ",
+      "Electron",
+      "Python",
+      "Chrome Extensions",
+      "Gmail API",
+      "Razorpay",
+      "Firebase Auth",
+      "GitHub Actions",
+      "PM2",
+      "Linux VPS"
+    ],
+    "metrics": [
+      {
+        "label": "Shipping Pace",
+        "value": "A new extension version every ~2 days"
+      },
+      {
+        "label": "Products",
+        "value": "3 connected platforms"
+      },
+      {
+        "label": "Data Engine",
+        "value": "Products · Keywords · Brands · Sellers"
+      },
+      {
+        "label": "Infrastructure",
+        "value": "Self-hosted, run end to end by me"
+      }
+    ],
+    "linkedProjects": [
+      "marketbaaz",
+      "workforce-hrms",
+      "crm-platform",
+      "reel-script-generator"
+    ]
+  },
+  {
+    "company": "Blackboard E-Learning Pvt Ltd (College Vidya)",
+    "role": "Software Developer & Associate Manager",
+    "location": "India",
+    "startDate": "May 2024",
+    "endDate": "April 2026",
+    "isCurrent": false,
+    "description": "Led engineering initiatives for EdTech platforms serving 20,000+ active students across LMS, ERP, and operational portals.",
+    "order": 2,
+    "bullets": [
+      "Spearheaded the Microsoft Teams Graph API integration, automating meeting generation and calendar event synchronization for 20K+ learners.",
+      "Re-architected bulk communication infrastructure from browser-dependent loops to Redis/BullMQ worker queues, eliminating dropouts.",
+      "Optimized heavy database queries across student records, reducing peak query times from 2.5s to under 300ms.",
+      "Promoted to Associate Manager, mentoring junior developers and coordinating cross-functional sprints across engineering, academic, and operations teams."
+    ],
+    "technologies": [
+      "Node.js",
+      "Express",
+      "React",
+      "Next.js",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "BullMQ",
+      "Microsoft Graph API"
+    ],
+    "metrics": [
+      {
+        "label": "Active Scale",
+        "value": "20K+ Students"
+      },
+      {
+        "label": "Query Speed",
+        "value": "9× Improvement"
+      },
+      {
+        "label": "RAM Savings",
+        "value": "72% Reduction"
+      }
+    ],
+    "linkedProjects": [
+      "microsoft-teams-engine",
+      "bulk-email-engine",
+      "college-vidya-lms"
+    ]
+  },
+  {
+    "company": "Freelance Web Developer",
+    "role": "Full Stack Engineer",
+    "location": "Remote",
+    "startDate": "2023",
+    "endDate": "2024",
+    "isCurrent": false,
+    "description": "Delivered custom web applications and business systems for independent clients and emerging businesses.",
+    "order": 3,
+    "bullets": [
+      "Built end-to-end bespoke web applications with Next.js, Node.js, and relational databases.",
+      "Handled entire lifecycle: client discovery, system architecture, database modeling, UI implementation, deployment, and ongoing support.",
+      "Delivered clean, maintainable code with high Lighthouse performance and SEO scores."
+    ],
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "PostgreSQL",
+      "Tailwind CSS"
+    ],
+    "metrics": [
+      {
+        "label": "Delivery",
+        "value": "End-to-End"
+      },
+      {
+        "label": "Performance",
+        "value": "95+ Lighthouse"
+      }
+    ],
+    "linkedProjects": [
+      "akshta-enterprises"
+    ]
+  }
+]

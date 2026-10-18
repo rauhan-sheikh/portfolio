@@ -1,0 +1,53 @@
+{
+  "title": "Microsoft Teams & Calendar Engine",
+  "slug": "microsoft-teams-engine",
+  "category": "PROFESSIONAL",
+  "year": "2024–2025",
+  "shortDesc": "Hiding deep Microsoft Graph API complexity behind an automated calendar & meeting sync engine for 20K+ EdTech users.",
+  "longDesc": "Microsoft Graph presented an awkward conflict between calendar visibility and required meeting configuration. By orchestrating a multi-step backend resolution flow, faculty members experienced seamless 1-click meeting schedules without needing to understand Microsoft API idiosyncrasies.",
+  "status": "PUBLISHED",
+  "isFeatured": true,
+  "order": 4,
+  "coverImage": "/projects/teams-sync.png",
+  "thumbnail": null,
+  "accentColor": "#6366f1",
+  "projectMark": "MS-GRAPH",
+  "liveUrl": "",
+  "githubUrl": "",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "Graph API's onlineMeeting creation endpoint created meetings that did not appear on users' Outlook calendars, whereas creating a calendar event did not allow granular meeting configuration (waiting rooms, attendee permissions, recording policies). Faculty had to either manually configure meetings or paste links across different screens.",
+  "theMessyPart": "Microsoft Graph doesn't immediately return the online meeting ID from a calendar event creation. The backend had to create the calendar event with isOnlineMeeting: true, extract the joinWebUrl, decode the meeting coordinates, resolve the hidden meeting ID, and patch the online meeting settings asynchronously before delivering the meeting link to the LMS.",
+  "architecture": "Create Calendar Event -> Extract Join Web URL -> Resolve Online Meeting ID -> Patch Meeting Settings & Permissions -> Return Uniform LMS Object. Retries with exponential backoff on Graph throttling (429).",
+  "technicalDecisions": "1. Orchestrated asynchronous sequence that masks 4 distinct Graph API calls into a single synchronous response to the frontend.\n2. In-memory caching of delegated and application OAuth tokens in Redis with proactive refresh 5 minutes prior to expiry.\n3. Automatic exponential backoff jitter on Microsoft Graph 429 rate-limiting spikes.",
+  "whatIdChange": "Would implement a webhook listener for Microsoft Graph change notifications earlier to catch edge cases where meetings were modified or cancelled directly in Outlook by instructors.",
+  "fullContent": "## The Hidden Complexity of Microsoft Graph\n\nWhen building lecture scheduling for over 20,000 active students, instructors needed scheduled meetings to appear directly on their corporate Outlook calendars while simultaneously adhering to strict academic permissions:\n- Muted attendee microphones by default\n- Restricted screen sharing\n- Automatic cloud recording enabled\n- Waiting room bypass for enrolled students only\n\n### The API Conflict\n- If you call `/me/onlineMeetings`, you get granular meeting controls, but **no Outlook calendar event is created**.\n- If you call `/me/events` with `isOnlineMeeting: true`, an event is placed on the calendar, but the response **does not provide granular meeting policy controls**.\n\n### The Solution: Multi-Step Resolution Pipeline\nWe designed an automated backend orchestrator:\n1. Dispatch `POST /me/events` with online meeting flags.\n2. Intercept the generated `joinWebUrl` from the response.\n3. Parse the thread coordinate identifiers and resolve the underlying `onlineMeeting` record.\n4. Issue a subsequent `PATCH /me/onlineMeetings/{id}` configuring attendance reports, lobby rules, and recording locks.\n5. Return a clean, unified lecture entity to the LMS frontend.\n\nThe user saw a single \"Schedule Class\" button and a 400ms turnaround. All complexity was absorbed by the backend.",
+  "showOnHome": true,
+  "showInWork": true,
+  "stack": [
+    "Node.js",
+    "Express",
+    "Microsoft Graph API",
+    "TypeScript",
+    "PostgreSQL",
+    "Redis"
+  ],
+  "metrics": [
+    {
+      "label": "Active Users",
+      "value": "20K+",
+      "description": "Students and faculty seamlessly scheduled"
+    },
+    {
+      "label": "Manual Effort",
+      "value": "Zero",
+      "description": "Eliminated manual link pasting & permissions config"
+    },
+    {
+      "label": "Reliability",
+      "value": "99.9%",
+      "description": "Resilient token handling and rate-limit recovery"
+    }
+  ],
+  "links": []
+}

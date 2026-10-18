@@ -1,0 +1,58 @@
+{
+  "title": "Akshta Enterprises",
+  "slug": "akshta-enterprises",
+  "category": "CLIENT",
+  "year": "2026",
+  "shortDesc": "Commercial business platform engineered end-to-end for Akshta Enterprises with custom responsive layouts, automated inquiry routing, and direct WhatsApp integrations.",
+  "longDesc": "Designed and developed a live production-ready web application for Akshta Enterprises. Handled full lifecycle delivery from client discovery and architecture through deployment, integrating EmailJS contact pipelines, WhatsApp customer communication, responsive typography, and high SEO performance.",
+  "status": "PUBLISHED",
+  "isFeatured": true,
+  "order": 9,
+  "coverImage": "/projects/akshta.png",
+  "thumbnail": null,
+  "accentColor": "#10b981",
+  "projectMark": "AKSH",
+  "liveUrl": "https://akshtaenterprises.com/",
+  "githubUrl": "",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "The client needed a modern, accessible digital presence to showcase manufacturing and enterprise operations. Traditional generic templates had heavy bloat, poor mobile conversion paths, and lacked instantaneous lead capture channels for commercial inquiries.",
+  "theMessyPart": "Iterating directly on client requirements and content revisions while maintaining strict performance budgets, sub-second initial load times, and ensuring zero message drops on mobile network drops.",
+  "architecture": "Next.js application with Tailwind CSS for high-performance styling. Client-side form validation orchestrating dual dispatch: asynchronous transactional delivery via EmailJS for logging alongside instant WhatsApp deep-link generation for real-time customer messaging.",
+  "technicalDecisions": "1. Jamstack architecture with static optimization ensuring rapid TTFB and 98+ Lighthouse scores.\n2. Direct WhatsApp API integration alongside validated EmailJS form pipelines.\n3. Accessibility (WCAG compliant) and responsive UX across all screen sizes.\n4. Comprehensive on-page SEO with semantic HTML5 and OpenGraph metadata.",
+  "whatIdChange": "Integrate headless CMS earlier to allow direct client catalog updates without requiring code adjustments.",
+  "fullContent": "## End-to-End Client Delivery\n\nBuilding client software requires a different muscle than internal tools: you are directly responsible for translating commercial objectives into responsive, maintainable production software.\n\n### Core Deliverables\n- **Custom Responsive Architecture**: Engineered from scratch using Next.js and Tailwind CSS, tailored specifically to commercial showcase needs.\n- **Dual Inquiry Pipeline**: Integrated direct WhatsApp messaging triggers and EmailJS transactional notifications for immediate customer response.\n- **Performance & SEO Excellence**: Structured semantic HTML, OpenGraph tags, and clean layout geometry delivering 98+ Lighthouse metrics.\n- **Full Ownership**: Managed requirements gathering, iterative revisions, production deployment, and domain DNS setup.",
+  "showOnHome": true,
+  "showInWork": true,
+  "stack": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Node.js",
+    "EmailJS"
+  ],
+  "metrics": [
+    {
+      "label": "Performance",
+      "value": "98+ Lighthouse",
+      "description": "Near-instant mobile & desktop load times"
+    },
+    {
+      "label": "Inquiry Flow",
+      "value": "Email & WhatsApp",
+      "description": "Automated real-time lead capture pipelines"
+    },
+    {
+      "label": "Delivery",
+      "value": "End-to-End",
+      "description": "Requirements, architecture, UI, and live deployment"
+    }
+  ],
+  "links": [
+    {
+      "label": "Live Website",
+      "url": "https://akshtaenterprises.com/"
+    }
+  ]
+}

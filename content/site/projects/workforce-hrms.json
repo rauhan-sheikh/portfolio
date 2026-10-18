@@ -1,0 +1,61 @@
+{
+  "title": "Workforce HRMS & Desktop App",
+  "slug": "workforce-hrms",
+  "category": "INTERNAL",
+  "year": "2026",
+  "shortDesc": "An internal HR platform for a growing company: attendance, leave, payroll and approvals in one place, plus a desktop app for Windows and macOS. Internal tool, so described at a high level.",
+  "longDesc": "A rebuild of the company's workforce system into a full HRMS: a Next.js admin and employee portal on MongoDB, and an Electron desktop app for Windows and macOS. Built by a two-person team, with me as the senior developer. Internal to the company, so this page describes the engineering approach rather than the product specifics.",
+  "status": "PUBLISHED",
+  "isFeatured": true,
+  "order": 2,
+  "coverImage": null,
+  "thumbnail": null,
+  "accentColor": "#6366f1",
+  "projectMark": "HRMS",
+  "liveUrl": "",
+  "githubUrl": "",
+  "demoUrl": null,
+  "caseStudySlug": null,
+  "theProblem": "An older workforce system had accumulated issues and fixed rules. Numbers disagreed between views, and because payroll depends on attendance, every inconsistency turned into a money problem.",
+  "theMessyPart": "Real attendance is messy: different shifts, machines that restart or drop offline, and rules that vary by team. All of it has to resolve to one consistent number everywhere, because payroll consumes it.",
+  "architecture": "A Next.js and Node.js application on MongoDB with per-person logins and a role- and department-scoped permission model, an approval engine, and ledger-style balances. An Electron desktop app for Windows and macOS stores data locally and syncs reliably when the connection returns. Everything is self-hosted and deployed through scripted, health-checked releases with automatic rollback.",
+  "technicalDecisions": "1. Configurable policy: rules live in admin settings with defaults that preserve existing behaviour, not in code.\n2. Ledger-style balances instead of mutable counters, so history is always explainable.\n3. Approved payroll data is locked; reopening requires a recorded reason.\n4. Resumable report generation so large reports survive interruptions.\n5. Audit trails with reasons for every sensitive change, and notifications to the people affected.\n6. Offline-tolerant desktop app that keeps pending data until the server confirms receipt.\n7. Automated tests and in-app help kept in step with every release.",
+  "whatIdChange": "I would model shifts and rosters before building attendance reporting. Retrofitting varied schedules onto a single-shift assumption forced rework across reports and payroll.",
+  "fullContent": "## Scope\n\nAn internal HR platform in three parts: an **admin portal** for HR and management, an **employee portal**, and a **desktop app** for Windows and macOS, all backed by one Next.js, Node.js and MongoDB system that I also host and operate.\n\nIt covers attendance and shifts, leave, payroll, incentives, reimbursements, employee records and reporting, with approvals that can span multiple levels per request type.\n\n## The engineering themes\n\n- **Policy as configuration.** Almost nothing that HR cares about is hard-coded. New rules ship as settings whose defaults keep today's behaviour, so features can be introduced gradually.\n- **Correctness first.** Balances are ledgers, approved payroll is locked, and every sensitive change is audited with a reason.\n- **Resilience.** The desktop app keeps working offline and syncs safely; long-running reports resume where they stopped.\n- **Maintainability.** A large automated test suite, searchable in-app help in all three apps that is updated with every release, and scripted deployments with automatic rollback.\n\n## Note\n\nThis is an internal company system built by a two-person team, with me as the senior developer. There is no public link and I have kept the description deliberately general.",
+  "showOnHome": true,
+  "showInWork": true,
+  "stack": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Node.js",
+    "MongoDB",
+    "Electron",
+    "GitHub Actions",
+    "PM2",
+    "Linux VPS"
+  ],
+  "metrics": [
+    {
+      "label": "Team",
+      "value": "2 developers",
+      "description": "Senior developer on a two-person team"
+    },
+    {
+      "label": "Surfaces",
+      "value": "3 apps",
+      "description": "Admin portal, employee portal and a Windows & macOS desktop app"
+    },
+    {
+      "label": "Quality",
+      "value": "Tested before every release",
+      "description": "Automated checks, in-app help and rollback-ready deployments"
+    },
+    {
+      "label": "Hosting",
+      "value": "Self-managed",
+      "description": "Deployed and operated by me on our own servers"
+    }
+  ],
+  "links": []
+}
